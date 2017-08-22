@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ssm.dao.LocationDao">
+
+    <resultMap id="ProvinceBaseMap" type="ssm.model.Province">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="provinceID" property="provinceID" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <resultMap id="CityBaseMap" type="ssm.model.City">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="cityID" property="cityID" jdbcType="VARCHAR"/>
+        <result column="father" property="father" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="AreaBaseMap" type="ssm.model.Area">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="area" property="area" jdbcType="VARCHAR"/>
+        <result column="areaID" property="areaID" jdbcType="VARCHAR"/>
+        <result column="father" property="father" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="getAllProvince" resultMap="ProvinceBaseMap">
+        SELECT * FROM mos_province
+    </select>
+    <select id="getCityListByProvinceID" resultMap="CityBaseMap">
+        SELECT * FROM mos_city WHERE father =#{father}
+    </select>
+    <select id="getAreaListByCityID" resultMap="AreaBaseMap">
+       SELECT * FROM mos_area WHERE father =#{father}
+    </select>
+
+
+
+</mapper>

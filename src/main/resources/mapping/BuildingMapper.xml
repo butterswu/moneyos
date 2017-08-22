@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ssm.dao.BuildingDao">
+
+    <resultMap id="BuildingBaseMap" type="ssm.model.Building">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="building_park_id" property="buildingParkId" jdbcType="BIGINT"/>
+        <result column="building_name" property="buildingName" jdbcType="VARCHAR"/>
+        <result column="building_type" property="buildingType" jdbcType="TINYINT"/>
+    </resultMap>
+    <resultMap id="RoomBaseMap" type="ssm.model.Room">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="room_name" property="roomName" jdbcType="VARCHAR"/>
+        <result column="room_building_id" property="roomBuildingId" jdbcType="BIGINT"/>
+    </resultMap>
+    <insert id="newCompanyRoom">
+        INSERT INTO mos_room_com (com_id,room_id) VALUES (#{comId},#{roomId})
+    </insert>
+    <insert id="newRoom">
+       INSERT INTO mos_room (room_name,room_building_id) VALUES (#{roomName}, #{roomBuildingId})
+    </insert>
+
+    <select id="getRoomsByBuildingId" resultMap="RoomBaseMap">
+        SELECT * FROM mos_room WHERE room_building_id=#{id}
+    </select>
+
+    <select id="getBuildingListByParkId" resultMap="BuildingBaseMap">
+        SELECT * FROM mos_building WHERE building_park_id=#{id}
+    </select>
+    <insert id="newBuilding">
+      INSERT INTO mos_building (building_name,building_park_id)VALUES (#{buildingName},#{buildingParkId})
+    </insert>
+
+
+</mapper>

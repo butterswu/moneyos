@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ssm.dao.CompanyDao">
+
+    <resultMap id="CompanyBaseMap" type="ssm.model.Company">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="com_name" property="comName" jdbcType="VARCHAR"/>
+        <result column="com_count" property="comCount" jdbcType="VARCHAR"/>
+        <result column="com_num" property="comNum" jdbcType="VARCHAR"/>
+        <result column="com_target_date" property="comTargetDate" jdbcType="VARCHAR"/>
+        <result column="com_inf" property="comInf" jdbcType="VARCHAR"/>
+
+
+
+    </resultMap>
+    <select id="getCompanyListByParkId" resultMap="CompanyBaseMap">
+        SELECT c.* FROM
+        (
+        SELECT DISTINCT irc.com_id FROM
+        (
+        SELECT rr.*,rc.* FROM
+        (
+        SELECT r.id FROM
+        (
+        SELECT id   from mos_building WHERE building_park_id=#{id}
+        )b LEFT JOIN mos_room r on r.room_building_id=b.id
+        )rr RIGHT  JOIN mos_room_com rc on  rr.id=rc.room_id
+        )irc WHERE id is not NULL
+        )irc2 LEFT JOIN mos_company c on irc2.com_id=c.id
+    </select>
+    <insert id="newCompany">
+        INSERT INTO mos_company (com_name, com_count, com_num, com_inf) VALUES (#{comName}, #{comCount}, #{comNum}, #{comInf})
+    </insert>
+    <select id="getCompanyList" resultMap="CompanyBaseMap">
+        SELECT * FROM mos_company limit ${startPos},${pageSize}
+    </select>
+    <select id="getCompanyCount" resultType="long">
+        SELECT COUNT(*)FROM  mos_company
+    </select>
+    <select id="getCompanyById" resultMap="CompanyBaseMap">
+        select
+        *
+        from mos_company WHERE id=#{id}
+    </select>
+    <update id="updateCompany">
+        UPDATE mos_company SET  com_name = #{comName},com_num=#{comNum},com_target_date = #{comTargetDate} ,com_inf =#{comInf},com_count=#{comCount} WHERE id=#{id}
+    </update>
+    <select id="getAllCompany" resultMap="CompanyBaseMap">
+        SELECT * FROM mos_company
+    </select>
+    <select id="getCompanyByName" resultMap="CompanyBaseMap">
+        SELECT * FROM mos_company WHERE com_name LIKE '%${comName}%'
+    </select>
+
+</mapper>

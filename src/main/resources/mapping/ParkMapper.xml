@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ssm.dao.ParkDao">
+
+    <resultMap id="ParkBaseMap" type="ssm.model.Park">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="park_province" property="parkProvince" jdbcType="VARCHAR"/>
+        <result column="park_city" property="parkCity" jdbcType="VARCHAR"/>
+        <result column="park_district" property="parkDistrict" jdbcType="VARCHAR"/>
+        <result column="park_name" property="parkName" jdbcType="VARCHAR"/>
+        <result column="park_location" property="parkLocation" jdbcType="VARCHAR"/>
+        <result column="park_areaID" property="parkAreaID" jdbcType="VARCHAR"/>
+        <result column="area" property="area" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+
+        <collection property="parkBuildingList" ofType="ssm.model.Building">
+            <id column="bid" property="id" jdbcType="BIGINT"/>
+            <result column="building_name" property="buildingName" jdbcType="VARCHAR"/>
+            <result column="building_type" property="buildingType" jdbcType="TINYINT"/>
+            <collection property="buildingRoomList" ofType="ssm.model.Room">
+                <id column="rid" property="id" jdbcType="BIGINT"/>
+                <result column="room_name" property="roomName"/>
+            </collection>
+        </collection>
+    </resultMap>
+    <select id="getParkListByCompanyId" resultMap="ParkBaseMap">
+        SELECT p.* FROM(
+        SELECT DISTINCT building_park_id FROM(SELECT r.room_building_id from
+        (SELECT * from mos_room_com where com_id=#{id})rc LEFT JOIN mos_room r ON rc.room_id=r.id)
+        rr LEFT JOIN mos_building b ON rr.room_building_id=b.id
+        ) bb LEFT JOIN mos_park p on p.id=bb.building_park_id
+    </select>
+
+    <select id="getAllPark" resultMap="ParkBaseMap">
+        SELECT * FROM mos_park
+    </select>
+
+    <insert id="newPark">
+        INSERT INTO mos_park (park_name,park_location,park_areaID) VALUES (#{parkName},#{parkLocation},#{parkAreaID})
+    </insert>
+    <select id="getParkLocationById" resultMap="ParkBaseMap">
+                SELECT cc.*,pp.* from (SELECT pp.*,c.city,c.father 'cfather' from(SELECT p.*, a.areaID,a.area,a.father'afather' from (SELECT* from mos_park where id=#{id}) p LEFT JOIN mos_area a on p.park_areaID=a.areaID)pp LEFT JOIN mos_city c on pp.afather=c.cityID)cc LEFT JOIN mos_province pp ON cc.cfather=pp.provinceID
+    </select>
+    <select id="getBuildingCountByParkId" resultType="INT">
+        SELECT COUNT(*)bcount FROM mos_building WHERE building_park_id=#{id}
+
+    </select>
+    <select id="getParkById" resultMap="ParkBaseMap">
+       SELECT cc.*,pp.* from (SELECT pp.*,c.city,c.father 'cfather' from(SELECT p.*, a.areaID,a.area,a.father'afather' from (SELECT* from mos_park where id=#{id}) p LEFT JOIN mos_area a on p.park_areaID=a.areaID)pp LEFT JOIN mos_city c on pp.afather=c.cityID)cc LEFT JOIN mos_province pp ON cc.cfather=pp.provinceID
+    
+    </select>
+    <select id="getParkByPage" resultMap="ParkBaseMap">
+        SELECT cc.*,pp.* from (SELECT pp.*,c.city,c.father 'cfather' from(SELECT p.*, a.areaID,a.area,a.father'afather' from mos_park p LEFT JOIN mos_area a on p.park_areaID=a.areaID)pp LEFT JOIN mos_city c on pp.afather=c.cityID)cc LEFT JOIN mos_province pp ON cc.cfather=pp.provinceID limit ${startPos},${pageSize}
+    </select>
+    <select id="getParkCount" resultType="long">
+        SELECT COUNT(*) FROM mos_park
+    </select>
+
+    <!-- 分页SQL语句 -->
+      <select id="getParkByComId" resultMap="ParkBaseMap">
+          select * from mos_park p right join(select distinct b.building_park_id from mos_building b right join (select distinct r.room_building_id from mos_room r righT join (select * from mos_room_com where com_id =#{id})rr on r.id=rr.room_id)bi on b.id=bi.room_building_id)pi on p.id = pi.building_park_id
+      </select>
+        <select id="getAllByComId" resultMap="ParkBaseMap">
+             SELECT cc.*,pr.* FROM(SELECT aa.*,c.city,c.father 'cfather' from(SELECT p2.*,a.area,a.father 'afather' from (select p.*,bb.bid,bb.building_name,bb.building_type,bb.rid,bb.room_name from mos_park p right join (select b.id 'bid',b.building_name,b.building_type,b.building_park_id,rr.* from mos_building b right join (select r.id 'rid',r.room_name,r.room_building_id from mos_room r right join (select * from mos_room_com where com_id=#{id}) rc on r.id=rc.room_id)rr on b.id =rr.room_building_id)bb on p.id =bb.building_park_id)p2 LEFT JOIN mos_area a on p2.park_areaID= a.areaID)aa LEFT JOIN mos_city c ON aa.afather=c.cityID)cc LEFT JOIN mos_province pr ON cc.cfather=pr.provinceID
+        </select>
+</mapper>

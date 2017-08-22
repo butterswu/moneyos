@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ssm.dao.ManagerDao">
+
+    <resultMap id="ManagerBaseMap" type="ssm.model.Manager">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="man_name" property="manName" jdbcType="VARCHAR"/>
+        <result column="man_com_id" property="manComId" jdbcType="BIGINT"/>
+        <result column="man_intention" property="manIntention" jdbcType="TINYINT"/>
+        <result column="man_tel" property="manTel" jdbcType="VARCHAR"/>
+        <result column="man_email" property="manEmail" jdbcType="VARCHAR"/>
+        <result column="com_name" property="manComName" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+
+
+
+    <!-- 分页SQL语句 -->
+    <sql id="selectManagerIntention" >
+        (SELECT m.*,c.com_name FROM mos_manager m LEFT JOIN mos_company c ON m.man_com_id =c.id <where>
+        <if test="i0!=0">
+            OR man_intention=0
+        </if>
+        <if test="i1!=0">
+            OR man_intention=1
+        </if>
+        <if test="i2!=0">
+            OR man_intention=2
+        </if>
+        <if test="i3!=0">
+            OR man_intention=3
+        </if>
+        <if test="i4!=0">
+            OR man_intention=4
+        </if>
+    </where>) a
+    </sql>
+    <select id="selectManagerByPage" resultMap="ManagerBaseMap" parameterType="ssm.model.SelectInf">
+ 
+    select * from <include refid="selectManagerIntention"/>
+    <where>
+        <if test="managername!=null">
+            AND man_name LIKE '%${managername}%'
+        </if>
+        <if test="companyName!=null">
+            AND com_name LIKE '%${companyName}%'
+        </if>
+    </where>
+    limit ${startPos},${pageSize}
+
+
+  </select>
+    <select id="getManagerCount" resultType="long" parameterType="ssm.model.SelectInf">
+    SELECT COUNT(*) from <include refid="selectManagerIntention"/>
+        <where>
+            <if test="managername!=null">
+                AND man_name LIKE '%${managername}%'
+            </if>
+            <if test="companyName!=null">
+                AND com_name LIKE '%${companyName}%'
+            </if>
+        </where>
+
+    </select>
+    <select id="getManagerById" resultMap="ManagerBaseMap">
+        SELECT * FROM mos_manager where id =#{id}
+    </select>
+    <update id="updateManagerById" >
+        UPDATE mos_manager SET man_name = #{manager.manName},man_tel =#{manager.manTel},man_email=#{manager.manEmail} WHERE id=#{manager.id}
+    </update>
+    <update id="updateIntentionByRecord">
+        UPDATE mos_manager SET man_intention = #{record.reIntention} WHERE id = #{record.reManId}
+    </update>
+    <insert id="newManager">
+        INSERT INTO mos_manager ( man_name, man_com_id, man_intention, man_tel, man_email) VALUES (#{manName},#{manComId},#{manIntention},#{manTel},#{manEmail})
+    </insert>
+    <select id="getManagerListByComId" resultMap="ManagerBaseMap">
+        SELECT * FROM mos_manager WHERE man_com_id =#{id}
+    </select>
+</mapper>

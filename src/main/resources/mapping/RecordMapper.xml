@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ssm.dao.RecordDao">
+
+    <resultMap id="RecordBaseMap" type="ssm.model.Record">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="re_man_id" property="reManId" jdbcType="BIGINT"/>
+        <result column="re_inf" property="reInf" jdbcType="VARCHAR"/>
+        <result column="re_time" property="reTime" jdbcType="TIMESTAMP"/>
+        <result column="re_intention" property="reIntention" jdbcType="TINYINT"/>
+
+
+    </resultMap>
+
+
+
+    <!-- 分页SQL语句 -->
+    <select id="getRecordByManId" resultMap="RecordBaseMap">
+        select
+        *
+        from mos_record WHERE re_man_id=#{reManId}
+    </select>
+    <insert id="newRecord">
+        INSERT INTO mos_record (re_man_id,re_intention,re_inf) VALUES (#{reManId},#{reIntention},#{reInf})
+    </insert>
+
+</mapper>
