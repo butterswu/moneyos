@@ -12,7 +12,9 @@
     </resultMap>
 
 
-
+    <select id="findByUserName" resultMap="UserBaseMap">
+        select * from mos_user WHERE user_name=#{userName};
+    </select>
 
     <select id="selectAllUser" resultMap="UserBaseMap">
         SELECT user_name FROM mos_user

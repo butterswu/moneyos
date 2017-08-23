@@ -1,6 +1,10 @@
 package ssm.controller;
 
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +26,21 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @RequestMapping("/showUser")
+    @RequestMapping("/shiro-login")
+    public String shiroLogin(HttpServletRequest request,Model model,User user){
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(),user.getUserPwd());
+        try {
+            subject.login(token);
+        }catch (AuthenticationException ae){
+
+            return "login";
+        }
+        return "index";
+
+
+    }
+
     public String showUser(HttpServletRequest request, Model model){
         log.info("查询所有用户信息");
         List<User> userList = userService.getAllUser();
@@ -32,7 +50,7 @@ public class UserController {
     @RequestMapping("/loginpage")
     public  String loginpage(HttpServletRequest request, Model model){
         log.info("进入登陆界面");
-        return "lgin";
+        return "login";
     }
     @RequestMapping("/login")
     public ModelAndView login(User user){

@@ -26,7 +26,7 @@
 </head>
 <body>
 <div id="loginbox">
-    <form  class="form-vertical" action="<%=basePath%>user/login" method="post">
+    <form  class="form-vertical" action="<%=basePath%>user/shiro-login" method="post">
         <div class="control-group normal_text"> <h3><img src="pages/img/logo.png" alt="Logo" /></h3></div>
         <div class="control-group">
             <div class="controls">

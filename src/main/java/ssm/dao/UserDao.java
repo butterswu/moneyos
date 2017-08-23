@@ -10,8 +10,9 @@ import java.util.List;
 public interface UserDao {
 
 
-
+    User findByUserName(String userName);
     List<User> selectAllUser();
     User login(User user);
+
 }
 

@@ -19,7 +19,14 @@
     <!-- 自动扫描  @Controller-->
     <context:component-scan base-package="ssm.controller"/>
 
-
+    <!-- 包含shiro的配置文件 -->
+    <import resource="classpath:applicationContext-shiro.xml"/>
+    <!-- 添加shiro-->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
     <bean id="mappingJacksonHttpMessageConverter"
