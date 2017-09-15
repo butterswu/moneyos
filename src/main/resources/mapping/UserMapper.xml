@@ -6,19 +6,38 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="user_name" property="userName" jdbcType="VARCHAR"/>
         <result column="user_pwd" property="userPwd" jdbcType="VARCHAR"/>
-        <result column="user_position" property="userPosition" jdbcType="TINYINT"/>
         <result column="user_cname" property="userCname" jdbcType="VARCHAR"/>
+    <collection property="roleSet" ofType="ssm.model.Role">
+        <result column="role_id" property="id" jdbcType="BIGINT"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <collection property="permissionSet" ofType="ssm.model.Permission">
+            <result column="permission_id" property="id" jdbcType="BIGINT"/>
+            <result column="permission_name" property="permissionName"/>
+        </collection>
+    </collection>
 
     </resultMap>
-
-
+    <select id="getShiroByUserName" resultMap="UserBaseMap">
+        SELECT mm.*,mp.permission_name FROM
+        (
+        SELECT rp.*,mr.role_name FROM
+        (
+        SELECT mop.role_id,mop.permission_id from
+        (SELECT mus.role_id FROM mos_user_role mus RIGHT JOIN (SELECT * from mos_user where user_name=#{userName})u ON u.id=mus.user_id)rid
+        LEFT JOIN mos_role_permission mop on rid.role_id=mop.role_id
+        )rp LEFT JOIN mos_role mr ON rp.role_id=mr.id
+        )mm LEFT JOIN mos_permission mp ON mm.permission_id=mp.id
+    </select>
+    <select id="getUserLevelIdByUserName" resultMap="UserBaseMap">
+        SELECT user_level_id FROM mos_user WHERE user_name=#{userName}
+    </select>
     <select id="findByUserName" resultMap="UserBaseMap">
         select * from mos_user WHERE user_name=#{userName};
     </select>
-
     <select id="selectAllUser" resultMap="UserBaseMap">
-        SELECT user_name FROM mos_user
+        SELECT * FROM mos_user
     </select>
+
     <select id="login" resultMap="UserBaseMap">
         SELECT * FROM mos_user WHERE user_name=#{userName} AND user_pwd=#{userPwd}
     </select>

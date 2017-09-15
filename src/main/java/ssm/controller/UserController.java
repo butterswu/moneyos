@@ -69,4 +69,8 @@ public class UserController {
 
 
     }
+    @RequestMapping("/account")
+    public String Account(HttpServletRequest request,Model model){
+        return "account";
+    }
 }
