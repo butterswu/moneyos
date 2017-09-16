@@ -6,19 +6,18 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="user_name" property="userName" jdbcType="VARCHAR"/>
         <result column="user_pwd" property="userPwd" jdbcType="VARCHAR"/>
-        <result column="user_position" property="userPosition" jdbcType="TINYINT"/>
         <result column="user_cname" property="userCname" jdbcType="VARCHAR"/>
 
     </resultMap>
 
-
+    <select id="getUserLevelIdByUserName" resultMap="UserBaseMap">
+        SELECT user_level_id FROM mos_user WHERE user_name=#{userName}
+    </select>
     <select id="findByUserName" resultMap="UserBaseMap">
         select * from mos_user WHERE user_name=#{userName};
     </select>
 
-    <select id="selectAllUser" resultMap="UserBaseMap">
-        SELECT user_name FROM mos_user
-    </select>
+
     <select id="login" resultMap="UserBaseMap">
         SELECT * FROM mos_user WHERE user_name=#{userName} AND user_pwd=#{userPwd}
     </select>

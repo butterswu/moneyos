@@ -13,6 +13,6 @@ public interface UserDao {
     User findByUserName(String userName);
     List<User> selectAllUser();
     User login(User user);
-
+    int getUserLevelIdByUserName(String userName);
 }
 

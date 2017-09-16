@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ssm.dao.UserLevelDao">
+
+    <resultMap id="UserLevelBaseMap" type="ssm.model.UserLevel">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_level_name" property="userLevelId"/>
+        <result column="user_role_id" property="userRoleId"/>
+
+
+    </resultMap>
+
+
+
+    <select id="getUserlevelById" resultMap="UserLevelBaseMap">
+        SELECT * from mos_user_level WHERE id=#{userLevelId}
+    </select>
+
+
+</mapper>

@@ -7,6 +7,8 @@ public class User {
     private String userPwd;
     private int userPosition;
     private String userCname;
+    private UserLevel userLevel;
+
 
     public int getId() {
         return id;

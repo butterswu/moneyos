@@ -15,39 +15,42 @@
         String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
     %>
     <base href="<%=basePath%>">
-    <title>login</title><meta charset="UTF-8" />
+    <title>MoneyOS</title><meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="pages/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="pages/css/bootstrap-responsive.min.css" />
-    <link rel="stylesheet" href="pages/css/matrix-login.css" />
-    <link href="pages/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <!-- <link rel="stylesheet" href="pages/css/bootstrap.min.css" /> -->
+    <link rel="stylesheet" href="pages/css/login.css" />
+    <!-- <link rel="stylesheet" href="pages/css/bootstrap-responsive.min.css" /> -->
+    <!-- <link rel="stylesheet" href="pages/css/matrix-login.css" /> -->
+    <!-- <link href="pages/font-awesome/css/font-awesome.css" rel="stylesheet" /> -->
 
 
 </head>
 <body>
-<div id="loginbox">
-    <form  class="form-vertical" action="<%=basePath%>user/shiro-login" method="post">
-        <div class="control-group normal_text"> <h3><img src="pages/img/logo.png" alt="Logo" /></h3></div>
-        <div class="control-group">
+<div class="header"><a href="#" class="header_logo"></a></div>
+<div id="loginbox" class="loginbox">
+    <form  class="form-vertical formbox" action="<%=basePath%>user/shiro-login" method="post">
+        <h1 class="login_intrduce">登录MoneyOS系统</h1>
+        <div class="control-group btn_margin">
             <div class="controls">
                 <div class="main_input_box">
-                    <span class="add-on bg_lg"><i class="icon-user"></i></span><input type="text" placeholder="用户名" name="userName" />
+                    <input class="btn_username" type="text" placeholder="用户名" name="userName" />
                 </div>
             </div>
         </div>
-        <div class="control-group">
+        <div class="control-group btn_margin">
             <div class="controls">
                 <div class="main_input_box">
-                    <span class="add-on bg_ly"><i class="icon-lock"></i></span><input type="password" placeholder="密码" name="userPwd"/>
+                    <input class="btn_password" type="password" placeholder="密码" name="userPwd"/>
                 </div>
             </div>
         </div>
-        <div class="form-actions">
-
-            <span class="pull-right"><input   class="btn btn-success" type="submit" value="登陆"/> </span>
+        <div class="form-actions btn_margin">
+            <input class="btn btn-success btn_login" type="submit" value="登 录"/>
         </div>
     </form>
-    <form id="recoverform" action="#" class="form-vertical">
+    <!-- <form id="recoverform" action="#" class="form-vertical">
         <p class="normal_text">Enter your e-mail address below and we will send you instructions how to recover a password.</p>
 
         <div class="controls">
@@ -60,9 +63,9 @@
             <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo; Back to login</a></span>
 
         </div>
-    </form>
+    </form> -->
 </div>
-
+<div class="copyright">© 2017 Kindsaving Inc. All Rights Reserved.</div>
 <script src="pages/js/jquery.min.js"></script>
 <script src="pages/js/matrix.login.js"></script>
 </body>
