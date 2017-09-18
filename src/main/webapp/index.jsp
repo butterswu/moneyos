@@ -28,7 +28,11 @@
 
 </head>
 <body>
-<div class="header"><a href="#" class="header_logo"></a></div>
+<div class="headerbox">
+    <div class="header">
+        <a href="#" class="header_logo"></a>
+    </div>
+</div>
 <div id="loginbox" class="loginbox">
     <form  class="form-vertical formbox" action="<%=basePath%>user/shiro-login" method="post">
         <h1 class="login_intrduce">登录MoneyOS系统</h1>
