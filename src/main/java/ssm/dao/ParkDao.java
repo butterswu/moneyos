@@ -18,5 +18,6 @@ public interface ParkDao {
     void newPark(Park park);
     List<Park> getAllPark();
     List<Park> getParkListByCompanyId(long id);
+    List<Park> test();
 
 }

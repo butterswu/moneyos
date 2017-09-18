@@ -1,5 +1,6 @@
 package ssm.model;
 
+import java.util.List;
 import java.util.Set;
 
 public class User {
@@ -9,8 +10,7 @@ public class User {
     private String userPwd;
     private int userPosition;
     private String userCname;
-    private Set<Role> roleSet;
-    private Set<Permission> permissionSet;
+    private List<Role> roleList;
 
     @Override
     public String toString() {
@@ -20,26 +20,18 @@ public class User {
                 ", userPwd='" + userPwd + '\'' +
                 ", userPosition=" + userPosition +
                 ", userCname='" + userCname + '\'' +
-                ", roleSet=" + roleSet +
-                ", permissionSet=" + permissionSet +
+                ", roleList=" + roleList +
                 '}';
     }
 
-    public Set<Role> getRoleSet() {
-        return roleSet;
+    public List<Role> getRoleList() {
+        return roleList;
     }
 
-    public void setRoleSet(Set<Role> roleSet) {
-        this.roleSet = roleSet;
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
     }
 
-    public Set<Permission> getPermissionSet() {
-        return permissionSet;
-    }
-
-    public void setPermissionSet(Set<Permission> permissionSet) {
-        this.permissionSet = permissionSet;
-    }
 
     public int getId() {
         return id;

@@ -64,4 +64,5 @@
         <select id="getAllByComId" resultMap="ParkBaseMap">
              SELECT cc.*,pr.* FROM(SELECT aa.*,c.city,c.father 'cfather' from(SELECT p2.*,a.area,a.father 'afather' from (select p.*,bb.bid,bb.building_name,bb.building_type,bb.rid,bb.room_name from mos_park p right join (select b.id 'bid',b.building_name,b.building_type,b.building_park_id,rr.* from mos_building b right join (select r.id 'rid',r.room_name,r.room_building_id from mos_room r right join (select * from mos_room_com where com_id=#{id}) rc on r.id=rc.room_id)rr on b.id =rr.room_building_id)bb on p.id =bb.building_park_id)p2 LEFT JOIN mos_area a on p2.park_areaID= a.areaID)aa LEFT JOIN mos_city c ON aa.afather=c.cityID)cc LEFT JOIN mos_province pr ON cc.cfather=pr.provinceID
         </select>
+
 </mapper>

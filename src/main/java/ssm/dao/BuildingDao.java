@@ -14,4 +14,5 @@ public interface BuildingDao {
     List<Room> getRoomsByBuildingId(int id);
     void newRoom(Room room);
     void newCompanyRoom(ComRoom comRoom);
+
 }

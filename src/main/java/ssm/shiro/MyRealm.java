@@ -9,12 +9,10 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import ssm.dao.ParkDao;
 import ssm.dao.UserDao;
 import ssm.dao.UserLevelDao;
-import ssm.model.PermissionItem;
-import ssm.model.PermissionKind;
-import ssm.model.User;
-import ssm.model.UserLevel;
+import ssm.model.*;
 import ssm.service.UserService;
 
 import javax.annotation.Resource;
@@ -28,14 +26,27 @@ public class MyRealm extends AuthorizingRealm {
 
     @Resource
     private UserDao userDao;
-    private UserLevelDao userLevelDao;
-    private UserService userService;
+
+
 
     /** * 用于的权限的认证。 * @param principalCollection * @return */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String userName = principalCollection.getPrimaryPrincipal().toString() ;
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo() ;
+        User user1 =userDao.getShiroByUserName(userName);
+        Set<String> roleName = new HashSet<String>();
+        Set<String> permissions =new HashSet<String>();
+        for (Role role:user1.getRoleList()){
+            roleName.add(role.getRoleName());
+            for (Permission permission:role.getPermissionList()){
+                permissions.add(permission.getPermissionName());
+            }
+
+        }
+        for (String name:permissions){
+            System.out.println(name);
+        }
 
 
  /*       int userLevelId=userDao.getUserLevelIdByUserName(userName);
@@ -60,6 +71,8 @@ public class MyRealm extends AuthorizingRealm {
         Set<String> permissions = t_userService.findPermissions(username) ;
         info.setRoles(roleName);
         info.setStringPermissions(permissions);*/
+        info.setRoles(roleName);
+        info.setStringPermissions(permissions);
         return info;
     }
 
@@ -70,8 +83,8 @@ public class MyRealm extends AuthorizingRealm {
         //获取用户账号
         String username = token.getPrincipal().toString() ;
         User user = userDao.findByUserName(username) ;
-        User user1 =userDao.getShiroByUserName("butters.wu");
-        System.out.println(user1);
+
+
 
         if (user != null){
             //将查询到的用户账号和密码存放到 authenticationInfo用于后面的权限判断。第三个参数传入realName。

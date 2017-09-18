@@ -7,18 +7,18 @@
         <result column="user_name" property="userName" jdbcType="VARCHAR"/>
         <result column="user_pwd" property="userPwd" jdbcType="VARCHAR"/>
         <result column="user_cname" property="userCname" jdbcType="VARCHAR"/>
-    <collection property="roleSet" ofType="ssm.model.Role">
-        <result column="role_id" property="id" jdbcType="BIGINT"/>
-        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
-        <collection property="permissionSet" ofType="ssm.model.Permission">
-            <result column="permission_id" property="id" jdbcType="BIGINT"/>
-            <result column="permission_name" property="permissionName"/>
+        <collection property="roleList" ofType="ssm.model.Role">
+            <id column="role_id" property="id" jdbcType="BIGINT"/>
+            <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+             <collection property="permissionList" ofType="ssm.model.Permission">
+                 <id column="permission_id" property="id" jdbcType="BIGINT"/>
+                 <result column="permission_name" property="permissionName"/>
+             </collection>
         </collection>
-    </collection>
 
     </resultMap>
     <select id="getShiroByUserName" resultMap="UserBaseMap">
-        SELECT mm.*,mp.permission_name FROM
+        SELECT mm.role_id,mm.role_name,mm.permission_id,mp.permission_name FROM
         (
         SELECT rp.*,mr.role_name FROM
         (

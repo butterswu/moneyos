@@ -1,18 +1,28 @@
 package ssm.model;
 
+import java.util.List;
 import java.util.Set;
 
 public class Role {
     private int id;
     private String roleName;
-    Set<Permission> permissionSet;
+    private List<Permission> permissionList;
 
-    public Set<Permission> getPermissionSet() {
-        return permissionSet;
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", roleName='" + roleName + '\'' +
+                ", permissionList=" + permissionList +
+                '}';
     }
 
-    public void setPermissionSet(Set<Permission> permissionSet) {
-        this.permissionSet = permissionSet;
+    public List<Permission> getPermissionList() {
+        return permissionList;
+    }
+
+    public void setPermissionList(List<Permission> permissionList) {
+        this.permissionList = permissionList;
     }
 
     public int getId() {

@@ -5,7 +5,9 @@
   Time: 下午3:29
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <%
@@ -65,7 +67,11 @@
 
         <li><a href="<%=basePath%>client/managerlist"><i class="icon icon-th"></i> <span>客户管理</span></a></li>
         <li> <a href="<%=basePath%>park/parklist"><i class="icon icon-signal"></i> <span>园区管理</span></a> </li>
+
+
         <li><a href="<%=basePath%>user/user"><i class="icon icon-pencil"></i> <span>用户管理</span></a></li>
+
+
     </ul>
 </div>
 <!--sidebar-menu-->
@@ -90,6 +96,9 @@
 
 
             </ul>
+            <shiro:hasRole name="salesman">
+                <shiro:principal></shiro:principal>
+            </shiro:hasRole>
         </div>
         <!--End-Action boxes-->
 
@@ -105,7 +114,7 @@
 <!--Footer-part-->
 
 <div class="row-fluid">
-    <div id="footer" class="span12"> 2017 &copy; MoneyOS Brought to you by <a href="http://www.kindsacing.cn/"></a>kindsaving.cn</div>
+    <div id="footer" class="span12"> 2017 &copy; MoneyOS Brought to you by <a href="http://www.kindsaving.cn/"></a>kindsaving.cn</div>
 </div>
 
 <!--end-Footer-part-->
