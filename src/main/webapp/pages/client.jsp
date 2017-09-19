@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="pages/css/matrix-style.css" />
     <link rel="stylesheet" href="pages/css/matrix-media.css" />
     <link href="pages/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="pages/css/common.css" />
     <script src="pages/js/jquery.min.js"></script>
     <script src="pages/js/jquery.ui.custom.js"></script>
     <script src="pages/js/bootstrap.min.js"></script>
@@ -201,159 +203,145 @@
     </script>
 </head>
 <body>
-
-<!--Header-part-->
-<div id="header">
-    <h1><a href="dashboard.html">MoneyOS_2</a></h1></div>
-
-<!--close-Header-part-->
-
-<!--top-Header-menu-->
-<div id="user-nav" class="navbar navbar-inverse">
-    <ul class="nav">
-            <ul class="dropdown-menu">
-            </ul>
+<!--头部导航-->
+<div class="header">
+    <a class="header_logo" href="/"></a>
+</div>
+<!--侧导航-->
+<div id="sidebar-s" class="sidemenu">
+    <ul class="control_sidemenu">
+        <li class="active_menu"><a href="pages/index.jsp"><span></span>总览</a></li>
+        <li><a href="<%=basePath%>client/managerlist"><span></span>客户管理</a></li>
+        <li><a href="<%=basePath%>park/parklist"><span></span>园区管理</a></li>
+        <li><a href="<%=basePath%>user/user"><span></span>用户管理</a></li>
     </ul>
 </div>
-
-<!--start-top-serch-->
-
-<!--close-top-serch-->
-
-<!--sidebar-menu-->
-
-<div id="sidebar"> <a href="#" class="visible-phone"><i class="icon icon-th"></i>Tables</a>
-    <ul>
-        <li><a href="pages/index.jsp"><i class="icon icon-home"></i> <span>总览</span></a> </li>
-
-        <li class="active"><a href="<%=basePath%>client/managerlist"><i class="icon icon-th"></i> <span>客户管理</span></a></li>
-        <li> <a href="<%=basePath%>park/parklist"><i class="icon icon-signal"></i> <span>园区管理</span></a> </li>
-        <li><a href="<%=basePath%>user/user"><i class="icon icon-pencil"></i> <span>用户管理</span></a></li>
-    </ul>
-</div>
-<div id="content">
-    <div id="content-header">
-        <div id="breadcrumb"> <a href="pages/index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>总览</a> <a href="<%=basePath%>client/managerlist" class="icon-home">客户管理</a> </div>
-        <h1>客户管理</h1>
-    </div>
-    <div class="container-fluid">
-        <hr>
-        <div class="row-fluid">
-            <div class="span12">
-                <div class="widget-box">
+<!--主体显示-->
+<div class="contentbox">
+    <div id="content-s" class="maincontent">
+        <div id="content-header">
+            <div id="breadcrumb"> <a href="pages/index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>总览</a> <a href="<%=basePath%>client/managerlist" class="icon-home">客户管理</a> </div>
+            <h1>客户管理</h1>
+        </div>
+        <div class="container-fluid">
+            <hr>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="widget-box">
 
 
-                    <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-                        <h5>按联系人检索</h5><form action="<%=basePath%>client/companyList"> <button type="submit" class="btn btn-primary" >切换为按公司检索</button></form>
-                    </div>
-
-                    <div  data-toggle="buttons">
-                        <span>按意向</span>
-                        <label class="btn btn-default " >
-                            <input type="checkbox" id="i0" class="i">已签约
-                        </label>
-                        <label class="btn btn-default">
-                            <input type="checkbox" id="i4" class="i"> 试用中
-                        </label>
-                        <label class="btn btn-default">
-                            <input type="checkbox" id="i1" class="i"> A
-                        </label>
-                        <label class="btn btn-default">
-                            <input type="checkbox" id="i2" class="i"> B
-                        </label>
-                        <label class="btn btn-default">
-                            <input type="checkbox" id="i3" class="i"> C
-                        </label>
-                    </div>
-                    <span>按联系人</span><input type="text" id="selectByManager"><br>
-                    <span>按公司名</span><input type="text" id="selectByCompany">
-
-
-                    <div class="widget-content nopadding">
-                        <table class="table table-bordered ">
-                            <thead>
-                            <tr>
-                                <th>姓名</th>
-                                <th>公司</th>
-                                <th>意向</th>
-                                <th>电话</th>
-                                <th>联系人详细</th>
-                                <th>公司详细</th>
-                            </tr>
-                            </thead>
-                            <tbody id="mananagertable">
-                            </tbody>
-                        </table>
-                    </div>
-                    <div align="center" id="choosepage" >
-                        <p>原本</p>
-                    </div>
-                    <button type="button" class="btn btn-primary" id="createbt">
-                        添加联系人
-                    </button>
-                    <div id="myModal" >
-                        <div class=" clearfix visible-md-block visible-lg-block" hidden id="create">
-                            <div class="widget-content nopadding">
-                                <h4 id="newmanagersuccess" align="center" hidden >添加成功</h4>
-                                <form id="newmanager">
-
-                                    <div class="control-group">
-                                        <label class="control-label">姓名 :</label>
-                                        <div class="controls">
-                                            <input type="text" class="span11" placeholder="姓名" name="manName"/>
-                                        </div>
-                                    </div>
-                                    <div class="control-group" id="company">
-                                        <label class="control-label">公司 :</label>
-                                        <div class="controls">
-                                            <input type="text" class="span11" placeholder="公司"  id="companyname"/>
-                                            <input type="hidden" name="manComId" value="" id="companyid">
-                                        </div>
-                                        <div id="checkresult" hidden></div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">邮箱 :</label>
-                                        <div class="controls">
-                                            <input type="text"  class="span11" placeholder="邮箱" name="manEmail" />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">电话 :</label>
-                                        <div class="controls">
-                                            <input type="text" class="span11" placeholder="电话" name="manTel"/>
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">意向:</label>
-                                    </div>
-                                        <input type="hidden" class="span11"  name="manIntention"/>
-                                        <div class="btn-group" id="manIntent" data-toggle="buttons" >
-                                            <label class="btn btn-default">
-                                                <input type="radio" class="toggle" value="0"> 签约
-                                            </label>
-                                            <label class="btn btn-default">
-                                                <input type="radio" class="toggle" value="4"> 试用中
-                                            </label>
-                                            <label class="btn btn-default">
-                                                <input type="radio" class="toggle" value="1"> A
-                                            </label>
-                                            <label class="btn btn-default">
-                                                <input type="radio" class="toggle" value="2"> B
-                                            </label>
-                                            <label class="btn btn-default">
-                                                <input type="radio" class="toggle" value="3"> C
-                                            </label>
-                                        </div>
-                                    <div class="form-actions">
-                                        <button type="button" class="btn btn-success" id="b1" aria-checked="">保存</button>
-                                    </div>
-                                </form>
-                            </div>
+                        <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+                            <h5>按联系人检索</h5><form action="<%=basePath%>client/companyList"> <button type="submit" class="btn btn-primary" >切换为按公司检索</button></form>
                         </div>
+
+                        <div  data-toggle="buttons">
+                            <span>按意向</span>
+                            <label class="btn btn-default " >
+                                <input type="checkbox" id="i0" class="i">已签约
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="checkbox" id="i4" class="i"> 试用中
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="checkbox" id="i1" class="i"> A
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="checkbox" id="i2" class="i"> B
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="checkbox" id="i3" class="i"> C
+                            </label>
+                        </div>
+                        <span>按联系人</span><input type="text" id="selectByManager"><br>
+                        <span>按公司名</span><input type="text" id="selectByCompany">
+
+
+                        <div class="widget-content nopadding">
+                            <table class="table table-bordered ">
+                                <thead>
+                                <tr>
+                                    <th>姓名</th>
+                                    <th>公司</th>
+                                    <th>意向</th>
+                                    <th>电话</th>
+                                    <th>联系人详细</th>
+                                    <th>公司详细</th>
+                                </tr>
+                                </thead>
+                                <tbody id="mananagertable">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div align="center" id="choosepage" >
+                            <p>原本</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="createbt">
+                            添加联系人
+                        </button>
+                        <div id="myModal" >
+                            <div class=" clearfix visible-md-block visible-lg-block" hidden id="create">
+                                <div class="widget-content nopadding">
+                                    <h4 id="newmanagersuccess" align="center" hidden >添加成功</h4>
+                                    <form id="newmanager">
+
+                                        <div class="control-group">
+                                            <label class="control-label">姓名 :</label>
+                                            <div class="controls">
+                                                <input type="text" class="span11" placeholder="姓名" name="manName"/>
+                                            </div>
+                                        </div>
+                                        <div class="control-group" id="company">
+                                            <label class="control-label">公司 :</label>
+                                            <div class="controls">
+                                                <input type="text" class="span11" placeholder="公司"  id="companyname"/>
+                                                <input type="hidden" name="manComId" value="" id="companyid">
+                                            </div>
+                                            <div id="checkresult" hidden></div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">邮箱 :</label>
+                                            <div class="controls">
+                                                <input type="text"  class="span11" placeholder="邮箱" name="manEmail" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">电话 :</label>
+                                            <div class="controls">
+                                                <input type="text" class="span11" placeholder="电话" name="manTel"/>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">意向:</label>
+                                        </div>
+                                            <input type="hidden" class="span11"  name="manIntention"/>
+                                            <div class="btn-group" id="manIntent" data-toggle="buttons" >
+                                                <label class="btn btn-default">
+                                                    <input type="radio" class="toggle" value="0"> 签约
+                                                </label>
+                                                <label class="btn btn-default">
+                                                    <input type="radio" class="toggle" value="4"> 试用中
+                                                </label>
+                                                <label class="btn btn-default">
+                                                    <input type="radio" class="toggle" value="1"> A
+                                                </label>
+                                                <label class="btn btn-default">
+                                                    <input type="radio" class="toggle" value="2"> B
+                                                </label>
+                                                <label class="btn btn-default">
+                                                    <input type="radio" class="toggle" value="3"> C
+                                                </label>
+                                            </div>
+                                        <div class="form-actions">
+                                            <button type="button" class="btn btn-success" id="b1" aria-checked="">保存</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        </div>
     </div>
 </div>
 <!--Footer-part-->

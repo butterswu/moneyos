@@ -16,19 +16,17 @@
     %>
     <base href="<%=basePath%>">
     <title>MoneyOS</title><meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" user-scalable=no/>
     <meta http-equiv="Cache-Control" content="no-cache">
-    <link rel="shortcut icon" type="image/x-icon" href="/pages/img/favicon.ico">
-    <!-- <link rel="stylesheet" href="pages/css/bootstrap.min.css" /> -->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="pages/css/login.css" />
-    <!-- <link rel="stylesheet" href="pages/css/bootstrap-responsive.min.css" /> -->
-    <!-- <link rel="stylesheet" href="pages/css/matrix-login.css" /> -->
-    <!-- <link href="pages/font-awesome/css/font-awesome.css" rel="stylesheet" /> -->
-
-
 </head>
 <body>
-<div class="header"><a href="#" class="header_logo"></a></div>
+<div class="headerbox">
+    <div class="header">
+        <a href="/" class="header_logo"></a>
+    </div>
+</div>
 <div id="loginbox" class="loginbox">
     <form  class="form-vertical formbox" action="<%=basePath%>user/shiro-login" method="post">
         <h1 class="login_intrduce">登录MoneyOS系统</h1>
@@ -71,4 +69,3 @@
 </body>
 
 </html>
-
