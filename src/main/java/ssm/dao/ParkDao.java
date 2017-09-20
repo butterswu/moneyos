@@ -19,5 +19,7 @@ public interface ParkDao {
     List<Park> getAllPark();
     List<Park> getParkListByCompanyId(long id);
     List<Park> test();
+    List<Integer> getParkIdList();
+    List<Park> getParkListByIdList(List<Integer> idList);
 
 }

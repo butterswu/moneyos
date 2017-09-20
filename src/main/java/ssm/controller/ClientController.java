@@ -38,31 +38,17 @@ public class ClientController {
     }
     @RequestMapping("/managerlist")
     public String showManagerByPage(HttpServletRequest request, Model model) {
-
-
-
-
-
-
-
-
         return "client";
     }
     @RequestMapping("/managerinf")
     public String showManagerInf(HttpServletRequest request, Model model){
-
         this.managerService.getManagerById(request,model);
-
         return "client-manager";
-
     }
     @RequestMapping("/updateManager")
     public String updateManager(HttpServletRequest request, Model model,Manager manager){
-
-
         this.managerService.updateManagerById(request,model,manager);
         return ("forward:/client/managerinf");
-
     }
 
     @RequestMapping("/newRecord")

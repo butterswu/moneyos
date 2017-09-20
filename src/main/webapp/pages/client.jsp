@@ -197,6 +197,7 @@
             });
 
 
+
         });
     </script>
 </head>
@@ -229,6 +230,13 @@
         <li class="active"><a href="<%=basePath%>client/managerlist"><i class="icon icon-th"></i> <span>客户管理</span></a></li>
         <li> <a href="<%=basePath%>park/parklist"><i class="icon icon-signal"></i> <span>园区管理</span></a> </li>
         <li><a href="<%=basePath%>user/user"><i class="icon icon-pencil"></i> <span>用户管理</span></a></li>
+        <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>业务管理</span> <span class="label label-important">2</span></a>
+            <ul>
+                <li><a href="form-common.html">人员管理</a></li>
+                <li><a href="<%=basePath%>business/parkAllocation">园区分配</a></li>
+
+            </ul>
+        </li>
     </ul>
 </div>
 <div id="content">

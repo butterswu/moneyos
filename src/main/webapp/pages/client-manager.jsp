@@ -95,18 +95,45 @@
 
             })
             $("#call").click(function () {
-                var tel="0"
-                 var tel1=$("#tel").val();
-                tel+=tel1
+                var userAgentInfo = navigator.userAgent;
+                var Agents = ["Android", "iPhone",
+                    "SymbianOS", "Windows Phone",
+                    "iPad", "iPod"];
+                var windows=new RegExp('Windows')
 
-                var url="http://localhost:8780/dialout?number="+tel+""
-                $.ajax({
-                    type:"post",
-                    url:url,
-                    success:function (result) {
-                        $("#callresult").html(result)
-                    }
-                })
+                var iphone=new RegExp('iPhone')
+                var andriod=new RegExp('Android')
+                var mac=new RegExp('Macintosh')
+                var tel="0"
+                var tel1=$("#num").val();
+                if (tel1.length>4){
+                    tel+=tel1}
+                else {tel=tel1}
+
+                if (iphone.test(userAgentInfo)){
+
+                    window.open("EZUCPLUSAPP://ezucplus/info?phoneAction=sipDial&phoneNumber="+tel+"");
+
+                }
+
+                else if (windows.test(userAgentInfo)||mac.test(userAgentInfo)){
+
+                    var url="http://localhost:8780/dialout?number="+tel+""
+                    $.ajax({
+                        type:"post",
+                        url:url,
+                        success:function (result) {
+
+                        }
+                    })
+
+                }
+
+                else if (andriod.test(userAgentInfo)){
+
+                    //window.open("intent:#Intent;action=com.blisscloud.mobile.ezphone.phone;S.phoneAction=sipDial;S.phoneNumber=00912930792;end");
+                    window.open("ezucplusapptel:"+tel);
+                }
 
             })
 
