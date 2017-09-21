@@ -18,7 +18,6 @@
 <head>
     <title>MoneyOS</title>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="pages/css/bootstrap.min.css" />
     <link rel="stylesheet" href="pages/css/bootstrap-responsive.min.css" />
     <link rel="stylesheet" href="pages/css/uniform.css" />
@@ -28,6 +27,7 @@
     <link href="pages/font-awesome/css/font-awesome.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="pages/css/common.css" />
+    <link rel="stylesheet" href="pages/css/client.css" />
     <script src="pages/js/jquery.min.js"></script>
     <script src="pages/js/jquery.ui.custom.js"></script>
     <script src="pages/js/bootstrap.min.js"></script>
@@ -210,21 +210,19 @@
 <!--侧导航-->
 <div id="sidebar-s" class="sidemenu">
     <ul class="control_sidemenu">
-        <li class="active_menu"><a href="pages/index.jsp"><span></span>总览</a></li>
-        <li><a href="<%=basePath%>client/managerlist"><span></span>客户管理</a></li>
+        <li><a href="pages/index.jsp"><span></span>总览</a></li>
+        <li><a class="active_menu" href="<%=basePath%>client/managerlist"><span></span>客户管理</a></li>
         <li><a href="<%=basePath%>park/parklist"><span></span>园区管理</a></li>
         <li><a href="<%=basePath%>user/user"><span></span>用户管理</a></li>
     </ul>
 </div>
 <!--主体显示-->
 <div class="contentbox">
-    <div id="content-s" class="maincontent">
-        <div id="content-header">
-            <div id="breadcrumb"> <a href="pages/index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>总览</a> <a href="<%=basePath%>client/managerlist" class="icon-home">客户管理</a> </div>
+    <div id="maincontent" class="maincontent">
+        <div id="content-header-s" class="content_introduce">
             <h1>客户管理</h1>
         </div>
         <div class="container-fluid">
-            <hr>
             <div class="row-fluid">
                 <div class="span12">
                     <div class="widget-box">

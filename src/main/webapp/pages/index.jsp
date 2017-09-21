@@ -35,15 +35,15 @@
 <!--侧导航-->
 <div id="sidebar-s" class="sidemenu">
     <ul class="control_sidemenu">
-        <li class="active_menu"><a href="pages/index.jsp"><span></span>总览</a></li>
-        <li><a href="<%=basePath%>client/managerlist"><span></span>客户管理</a></li>
-        <li><a href="<%=basePath%>park/parklist"><span></span>园区管理</a></li>
-        <li><a href="<%=basePath%>user/user"><span></span>用户管理</a></li>
+        <li><a class="active_menu icon_common icon_a" href="pages/index.jsp">总览</a></li>
+        <li><a class="icon_common icon_b" href="<%=basePath%>client/managerlist">客户管理</a></li>
+        <li><a class="icon_common icon_c" href="<%=basePath%>park/parklist">园区管理</a></li>
+        <li><a class="icon_common icon_d" href="<%=basePath%>user/user">用户管理</a></li>
     </ul>
 </div>
 <!--主体显示-->
 <div class="contentbox">
-    <div id="content-s" class="maincontent">
+    <div id="maincontent" class="maincontent">
         <!--breadcrumbs-->
         <div id="content-header">
             <div id="breadcrumb"> <a href="pages/index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 总览</a></div>
@@ -55,81 +55,9 @@
             <div class="quick-actions_homepage">
                 <ul class="quick-actions">
                     <li class="bg_lb"> <a href="pages/index.jsp"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> 总览 </a> </li>
-
                     <li class="bg_lo"> <a href="<%=basePath%>client/managerlist"> <i class="icon-th"></i> 客户管理</a> </li>
                     <li class="bg_ls"> <a href="<%=basePath%>park/parklist"> <i class="icon-tint"></i> 园区管理</a> </li>
                     <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-
-                    <!--演示-->
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-                    <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
-
-
                 </ul>
             </div>
             <!--End-Action boxes-->

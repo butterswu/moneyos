@@ -206,9 +206,9 @@
 <!--侧导航-->
 <div id="sidebar-s" class="sidemenu">
     <ul class="control_sidemenu">
-        <li class="active_menu"><a href="pages/index.jsp"><span></span>总览</a></li>
+        <li><a href="pages/index.jsp"><span></span>总览</a></li>
         <li><a href="<%=basePath%>client/managerlist"><span></span>客户管理</a></li>
-        <li><a href="<%=basePath%>park/parklist"><span></span>园区管理</a></li>
+        <li><a class="active_menu" href="<%=basePath%>park/parklist"><span></span>园区管理</a></li>
         <li><a href="<%=basePath%>user/user"><span></span>用户管理</a></li>
     </ul>
 </div>

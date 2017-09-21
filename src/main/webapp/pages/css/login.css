@@ -15,3 +15,4 @@ input{ margin: 0; padding: 0; border: none; outline: none; -webkit-appearance: n
 .btn_login{ width: 325px; height: 38px; color: #fff; border-radius: 5px; background-color: #f81616; margin: 0 auto; font-size: 16px; font-weight: bold; cursor: pointer;}
 .btn_login:hover{ background-color: #f93d3d;}
 .copyright{ text-align: center; font-size: 14px; color: #777777; margin-top: 20px;}
+.copyright a{ font-size: 14px; color: #777777; text-decoration:none;}
