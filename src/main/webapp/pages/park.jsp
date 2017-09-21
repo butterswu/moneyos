@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="pages/css/matrix-style.css" />
     <link rel="stylesheet" href="pages/css/matrix-media.css" />
     <link href="pages/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="pages/css/common.css" />
     <script src="pages/js/jquery.min.js"></script>
     <script src="pages/js/jquery.ui.custom.js"></script>
     <script src="pages/js/bootstrap.min.js"></script>
@@ -197,118 +199,103 @@
     </script>
 </head>
 <body>
-
-<!--Header-part-->
-<div id="header">
-    <h1><a href="dashboard.html">MoneyOS_2</a></h1></div>
-
-<!--close-Header-part-->
-
-<!--top-Header-menu-->
-<div id="user-nav" class="navbar navbar-inverse">
-    <ul class="nav">
-        <ul class="dropdown-menu">
-        </ul>
-    </ul>
+<!--头部导航-->
+<div class="header">
+    <a class="header_logo" href="/"></a>
 </div>
-
-<!--start-top-serch-->
-
-<!--close-top-serch-->
-
-<!--sidebar-menu-->
-
-<div id="sidebar"> <a href="#" class="visible-phone"><i class="icon icon-th"></i>Tables</a>
-    <ul>
-        <li><a href="pages/index.jsp"><i class="icon icon-home"></i> <span>总览</span></a> </li>
-
-        <li ><a href="<%=basePath%>client/managerlist"><i class="icon icon-th"></i> <span>客户管理</span></a></li>
-
-        <li class="active"> <a   href="<%=basePath%>park/parklist"><i class="icon icon-signal"></i> <span>园区管理</span></a> </li>
+<!--侧导航-->
+<div id="sidebar-s" class="sidemenu">
+    <ul class="control_sidemenu">
+        <li><a href="pages/index.jsp"><span></span>总览</a></li>
+        <li><a href="<%=basePath%>client/managerlist"><span></span>客户管理</a></li>
+        <li><a class="active_menu" href="<%=basePath%>park/parklist"><span></span>园区管理</a></li>
 
     </ul>
 </div>
-<div id="content">
-    <div id="content-header">
-        <div id="breadcrumb"> <a href="pages/index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>总览</a> <a href="<%=basePath%>park/parklist" class="icon-home">楼盘管理</a> </div>
-        <h1>园区管理</h1>
-    </div>
-    <div class="container-fluid">
-        <hr>
-        <div class="row-fluid">
-            <div class="span12">
-                <div class="widget-box">
+<!--主体显示-->
+<div class="contentbox">
+    <div id="content-s" class="maincontent">
+        <div id="content-header">
+            <div id="breadcrumb"> <a href="pages/index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>总览</a> <a href="<%=basePath%>park/parklist" class="icon-home">楼盘管理</a> </div>
+            <h1>园区管理</h1>
+        </div>
+        <div class="container-fluid">
+            <hr>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="widget-box">
 
 
-                    <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+                        <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
 
-                    </div>
-
-
+                        </div>
 
 
-                    <div class="widget-content nopadding">
-                        <table class="table table-bordered ">
-                            <thead>
-                            <tr>
-                                <th>园区全称</th>
-                                <th>园区地区</th>
-                                <th>园区地址</th>
-                                <th>园区详细信息</th>
 
-                            </tr>
-                            </thead>
-                            <tbody id="parktable">
-                            </tbody>
-                        </table>
-                    </div>
-                    <div align="center" id="choosepage" >
-                        <p>原本</p>
-                    </div>
-                    <button type="button" class="btn btn-primary" id="createbt">
-                        添加园区
-                    </button>
-                    <div id="myModal" >
-                        <div class=" clearfix visible-md-block visible-lg-block" hidden id="create">
-                            <div class="widget-content nopadding">
-                                <h4 id="newparksuccess" align="center" hidden >添加成功</h4>
-                                <form id="newpark">
-                                    <input type="hidden" name="parkAreaID" id="parkAreaID"/>
 
-                                    <div class="control-group">
-                                        <label class="control-label">园区名称 :</label>
-                                        <div class="controls">
-                                            <input type="text" class="span11" placeholder="园区名称" name="parkName" id="pname"/>
+                        <div class="widget-content nopadding">
+                            <table class="table table-bordered ">
+                                <thead>
+                                <tr>
+                                    <th>园区全称</th>
+                                    <th>园区地区</th>
+                                    <th>园区地址</th>
+                                    <th>园区详细信息</th>
+
+                                </tr>
+                                </thead>
+                                <tbody id="parktable">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div align="center" id="choosepage" >
+                            <p>原本</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="createbt">
+                            添加园区
+                        </button>
+                        <div id="myModal" >
+                            <div class=" clearfix visible-md-block visible-lg-block" hidden id="create">
+                                <div class="widget-content nopadding">
+                                    <h4 id="newparksuccess" align="center" hidden >添加成功</h4>
+                                    <form id="newpark">
+                                        <input type="hidden" name="parkAreaID" id="parkAreaID"/>
+
+                                        <div class="control-group">
+                                            <label class="control-label">园区名称 :</label>
+                                            <div class="controls">
+                                                <input type="text" class="span11" placeholder="园区名称" name="parkName" id="pname"/>
+                                            </div>
                                         </div>
-                                    </div>
 
 
-                                    <label class="control-label">选择省:</label>
-                                    <select id="ptable"  style="width:150px"  >
+                                        <label class="control-label">选择省:</label>
+                                        <select id="ptable"  style="width:150px"  >
 
-                                    </select>
-                                    <label class="control-label">选择市:</label>
-                                    <select id="ctable"  style="width:150px">
+                                        </select>
+                                        <label class="control-label">选择市:</label>
+                                        <select id="ctable"  style="width:150px">
 
-                                    </select>
-                                    <label class="control-label">选择区:</label>
-                                    <select id="atable"  style="width:150px">
+                                        </select>
+                                        <label class="control-label">选择区:</label>
+                                        <select id="atable"  style="width:150px">
 
-                                    </select>
-                                    <div class="control-group">
-                                        <label class="control-label">园区地址  :</label>
-                                        <div class="controls">
-                                            <input type="text"  class="span11" placeholder="园区地址" name="parkLocation" id="plocation" />
+                                        </select>
+                                        <div class="control-group">
+                                            <label class="control-label">园区地址  :</label>
+                                            <div class="controls">
+                                                <input type="text"  class="span11" placeholder="园区地址" name="parkLocation" id="plocation" />
+                                            </div>
                                         </div>
-                                    </div>
 
 
-                                    <input type="hidden" class="span11"  name="comInf"/>
+                                        <input type="hidden" class="span11"  name="comInf"/>
 
-                                    <div class="form-actions">
-                                        <button type="button" class="btn btn-success" id="save" aria-checked="">保存</button>
-                                    </div>
-                                </form>
+                                        <div class="form-actions">
+                                            <button type="button" class="btn btn-success" id="save" aria-checked="">保存</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

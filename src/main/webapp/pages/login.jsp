@@ -16,19 +16,16 @@
     %>
     <base href="<%=basePath%>">
     <title>MoneyOS</title><meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Cache-Control" content="no-cache">
-    <link rel="shortcut icon" type="image/x-icon" href="/pages/img/favicon.ico">
-    <!-- <link rel="stylesheet" href="pages/css/bootstrap.min.css" /> -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="pages/css/login.css" />
-    <!-- <link rel="stylesheet" href="pages/css/bootstrap-responsive.min.css" /> -->
-    <!-- <link rel="stylesheet" href="pages/css/matrix-login.css" /> -->
-    <!-- <link href="pages/font-awesome/css/font-awesome.css" rel="stylesheet" /> -->
-
-
 </head>
 <body>
-<div class="header"><a href="#" class="header_logo"></a></div>
+<div class="headerbox">
+    <div class="header">
+        <a href="/" class="header_logo"></a>
+    </div>
+</div>
 <div id="loginbox" class="loginbox">
     <form  class="form-vertical formbox" action="<%=basePath%>user/shiro-login" method="post">
         <h1 class="login_intrduce">登录MoneyOS系统</h1>
@@ -50,25 +47,10 @@
             <input class="btn btn-success btn_login" type="submit" value="登 录"/>
         </div>
     </form>
-    <!-- <form id="recoverform" action="#" class="form-vertical">
-        <p class="normal_text">Enter your e-mail address below and we will send you instructions how to recover a password.</p>
-
-        <div class="controls">
-            <div class="main_input_box">
-                <span class="add-on bg_lo"><i class="icon-envelope"></i></span><input type="text" placeholder="E-mail address" />
-            </div>
-        </div>
-
-        <div class="form-actions">
-            <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo; Back to login</a></span>
-
-        </div>
-    </form> -->
 </div>
-<div class="copyright">© 2017 Kindsaving Inc. All Rights Reserved.</div>
+<div class="copyright">© 2017 Kindsaving Inc. All Rights Reserved.<a href="http://www.miitbeian.gov.cn"> 沪ICP备15011426号</a></div>
 <script src="pages/js/jquery.min.js"></script>
 <script src="pages/js/matrix.login.js"></script>
 </body>
 
 </html>
-

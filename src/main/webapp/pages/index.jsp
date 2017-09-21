@@ -18,7 +18,7 @@
 <head>
     <title>MoneyOS</title>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no" />
     <link rel="stylesheet" href="pages/css/bootstrap.min.css" />
     <link rel="stylesheet" href="pages/css/bootstrap-responsive.min.css" />
     <link rel="stylesheet" href="pages/css/fullcalendar.css" />
@@ -27,97 +27,50 @@
     <link href="pages/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" href="pages/css/jquery.gritter.css" />
 
+    <link rel="stylesheet" href="pages/css/common.css" />
 </head>
 <body>
-
-<!--Header-part-->
-<div id="header">
-    <h1><a href="dashboard.html">MoneyOS</a></h1>
+<!--头部导航-->
+<div class="header">
+    <a class="header_logo" href="/"></a>
 </div>
-<!--close-Header-part-->
-
-
-<!--top-Header-menu-->
-<div id="user-nav" class="navbar navbar-inverse">
-    <ul class="nav">
-
-            <ul class="dropdown-menu">
-
-            </ul>
-        </li>
-
-            <ul class="dropdown-menu">
-
-            </ul>
-        </li>
-
+<!--侧导航-->
+<div id="sidebar-s" class="sidemenu">
+    <ul class="control_sidemenu">
+        <li><a class="active_menu icon_common icon_a" href="pages/index.jsp">总览</a></li>
+        <li><a class="icon_common icon_b" href="<%=basePath%>client/managerlist">客户管理</a></li>
+        <li><a class="icon_common icon_c" href="<%=basePath%>park/parklist">园区管理</a></li>
+        <li><a class="icon_common icon_d" href="<%=basePath%>user/user">用户管理</a></li>
     </ul>
 </div>
-<!--close-top-Header-menu-->
-<!--start-top-serch-->
-<div id="search">
-
-</div>
-<!--close-top-serch-->
-<!--sidebar-menu-->
-<div id="sidebar"><a href="pages/index.jsp" class="visible-phone"><i class="icon icon-home"></i>总览</a>
-    <ul>
-
-        <li class="active"><a href="pages/index.jsp"><i class="icon icon-home"></i> <span>总览</span></a> </li>
-
-        <li><a href="<%=basePath%>client/managerlist"><i class="icon icon-th"></i> <span>客户管理</span></a></li>
-        <li> <a href="<%=basePath%>park/parklist"><i class="icon icon-signal"></i> <span>园区管理</span></a> </li>
-
-
-       
-
-
-    </ul>
-</div>
-<!--sidebar-menu-->
-
-<!--main-container-part-->
-<div id="content">
-    <!--breadcrumbs-->
-    <div id="content-header">
-        <div id="breadcrumb"> <a href="pages/index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 总览</a></div>
-    </div>
-    <!--End-breadcrumbs-->
-
-    <!--Action boxes-->
-    <div class="container-fluid">
-        <div class="quick-actions_homepage">
-            <ul class="quick-actions">
-                <li class="bg_lb"> <a href="pages/index.jsp"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> 总览 </a> </li>
-
-                <li class="bg_lo"> <a href="<%=basePath%>client/managerlist"> <i class="icon-th"></i> 客户管理</a> </li>
-                <li class="bg_ls"> <a href="<%=basePath%>park/parklist"> <i class="icon-tint"></i> 园区管理</a> </li>
-
-
-
-            </ul>
-            <shiro:hasRole name="salesman">
-                <shiro:principal></shiro:principal>
-            </shiro:hasRole>
+<!--主体显示-->
+<div class="contentbox">
+    <div id="maincontent" class="maincontent">
+        <!--breadcrumbs-->
+        <div id="content-header">
+            <div id="breadcrumb"> <a href="pages/index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 总览</a></div>
         </div>
-        <!--End-Action boxes-->
+        <!--End-breadcrumbs-->
 
-        <!--Chart-box-->
-        <!--End-Chart-box-->
-        <hr/>
+        <!--Action boxes-->
+        <div class="container-fluid">
+            <div class="quick-actions_homepage">
+                <ul class="quick-actions">
+                    <li class="bg_lb"> <a href="pages/index.jsp"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> 总览 </a> </li>
+                    <li class="bg_lo"> <a href="<%=basePath%>client/managerlist"> <i class="icon-th"></i> 客户管理</a> </li>
+                    <li class="bg_ls"> <a href="<%=basePath%>park/parklist"> <i class="icon-tint"></i> 园区管理</a> </li>
 
+                </ul>
+            </div>
+            <!--End-Action boxes-->
+
+            <!--Chart-box-->
+            <!--End-Chart-box-->
+            <hr/>
+
+        </div>
     </div>
 </div>
-
-<!--end-main-container-part-->
-
-<!--Footer-part-->
-
-<div class="row-fluid">
-    <div id="footer" class="span12"> 2017 &copy; MoneyOS Brought to you by <a href="http://www.kindsaving.cn/"></a>kindsaving.cn</div>
-</div>
-
-<!--end-Footer-part-->
 
 <script src="pages/js/excanvas.min.js"></script>
 <script src="pages/js/jquery.min.js"></script>
