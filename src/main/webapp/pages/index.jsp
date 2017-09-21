@@ -69,7 +69,7 @@
         <li> <a href="<%=basePath%>park/parklist"><i class="icon icon-signal"></i> <span>园区管理</span></a> </li>
 
 
-        <li><a href="<%=basePath%>user/user"><i class="icon icon-pencil"></i> <span>用户管理</span></a></li>
+       
 
 
     </ul>
@@ -92,7 +92,7 @@
 
                 <li class="bg_lo"> <a href="<%=basePath%>client/managerlist"> <i class="icon-th"></i> 客户管理</a> </li>
                 <li class="bg_ls"> <a href="<%=basePath%>park/parklist"> <i class="icon-tint"></i> 园区管理</a> </li>
-                <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>用户管理</a> </li>
+
 
 
             </ul>

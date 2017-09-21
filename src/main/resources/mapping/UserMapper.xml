@@ -6,7 +6,7 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="user_name" property="userName" jdbcType="VARCHAR"/>
         <result column="user_pwd" property="userPwd" jdbcType="VARCHAR"/>
-        <result column="user_cname" property="userCname" jdbcType="VARCHAR"/>
+        <result column="user_cn_name" property="userCname" jdbcType="VARCHAR"/>
         <collection property="roleList" ofType="ssm.model.Role">
             <id column="role_id" property="id" jdbcType="BIGINT"/>
             <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
@@ -40,5 +40,11 @@
 
     <select id="login" resultMap="UserBaseMap">
         SELECT * FROM mos_user WHERE user_name=#{userName} AND user_pwd=#{userPwd}
+    </select>
+    <select id="getSalesmanSubList" resultMap="UserBaseMap">
+        select u.id,u.user_name,u.user_cn_name  FROM
+        (
+        select * from mos_salesman_relationship WHERE  sup_id=#{id}
+        )sp LEFT JOIN mos_user u on sp.sub_id=u.id
     </select>
 </mapper>

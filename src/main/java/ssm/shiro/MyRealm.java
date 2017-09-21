@@ -1,6 +1,7 @@
 package ssm.shiro;
 
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -9,6 +10,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import ssm.dao.ParkDao;
 import ssm.dao.UserDao;
 import ssm.dao.UserLevelDao;
@@ -44,9 +46,7 @@ public class MyRealm extends AuthorizingRealm {
             }
 
         }
-        for (String name:permissions){
-            System.out.println(name);
-        }
+
 
 
  /*       int userLevelId=userDao.getUserLevelIdByUserName(userName);
@@ -90,6 +90,8 @@ public class MyRealm extends AuthorizingRealm {
             //将查询到的用户账号和密码存放到 authenticationInfo用于后面的权限判断。第三个参数传入realName。
             AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUserName(),user.getUserPwd(),
                     "a") ;
+            Subject subject= SecurityUtils.getSubject();
+            subject.getSession().setAttribute("user_id",user.getId());
             return authenticationInfo ;
         }else{
             return  null ;

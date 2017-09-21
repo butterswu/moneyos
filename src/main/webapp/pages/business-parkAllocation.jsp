@@ -35,24 +35,54 @@
     <script src="pages/js/matrix.js"></script>
     <script src="pages/js/matrix.tables.js"></script>
     <script type="text/javascript">
-        $(function () {
+        $(function (){
 
+
+            var getAllSub=function (userList,prename) {
+                $.each(userList,function (index,user) {
+                    var name=prename+user.userCname;
+                    $("#managertable").append("<tr><td>"+name+"</td></tr>")
+                    getAllSub(user.subordinate,name)
+                })
+            }
             var getControlledParkList=function () {
                 $.ajax({
                     type: "POST",
                     url:"<%=basePath%>business/getControlledParkList",
                     dataType: "json",
                     success:function (result) {
-                        alert(result)
-                    }
+                        var tableinf="";
+                        var parkList=$.parseJSON(result);
 
+                        $.each(parkList,function (index,item) {
+                            tableinf+="<tr><td>"+item.parkName+"</td></tr>"
+
+                        })
+                        $("#parktable").html(tableinf);
+                    }
                 })
 
-
+            }
+            var getSubList=function () {
+                $.ajax({
+                    type: "POST",
+                    url:"<%=basePath%>business/getSalesmanSubList",
+                    dataType: "json",
+                    success:function (result) {
+                        if (result=="none"){
+                        }
+                        else {
+                            var userList=$.parseJSON(result);
+                            var name=""
+                            getAllSub(userList,name);
+                        }
+                    }
+                })
             }
 
             $(document).ready(function(){
                 getControlledParkList();
+                getSubList();
 
             });
 
@@ -75,12 +105,9 @@
     <ul class="nav">
 
         <ul class="dropdown-menu">
-
         </ul>
         </li>
-
         <ul class="dropdown-menu">
-
         </ul>
         </li>
 
@@ -102,11 +129,9 @@
         <li> <a href="<%=basePath%>park/parklist"><i class="icon icon-signal"></i> <span>园区管理</span></a> </li>
 
 
-        <li><a href="<%=basePath%>user/user"><i class="icon icon-pencil"></i> <span>用户管理</span></a></li>
-
-        <li class="submenu active"> <a href="#"><i class="icon icon-th-list"></i> <span>业务管理</span> <span class="label label-important">2</span></a>
+        <li class="submenu active"> <a href="#"><i class="icon icon-th-list"></i> <span>权限管理</span> <span class="label label-important">2</span></a>
             <ul>
-                <li><a href="form-common.html">人员管理</a></li>
+                <li><a href="#">人员管理</a></li>
                 <li class="active"><a href="<%=basePath%>business/parkAllocation">园区分配</a></li>
 
             </ul>
@@ -125,22 +150,40 @@
         <h1>园区分配</h1>
     </div>
     <!--End-breadcrumbs-->
-<div id="controlledParkList">
-
+    <div class="widget-content nopadding">
+        <h2>可管理园区</h2>
+        <table class="table table-bordered ">
+            <thead>
+            <tr>
+                <th>园区名称</th>
+                <th>园区详细</th>
+            </tr>
+            </thead>
+            <tbody id="parktable">
+            </tbody>
+        </table><button type="button">分配园区</button>
+    </div>
+    <div class="widget-content nopadding">
+        <h2>可管理人员</h2>
+        <table class="table table-bordered ">
+            <thead>
+            <tr>
+                <th>人员姓名</th>
+                <th>所管理园区</th>
+                <th>下级信息</th>
+                <th>分配园区</th>
+            </tr>
+            </thead>
+            <tbody id="managertable">
+            </tbody>
+        </table>
+    </div>
 </div>
-
-</div>
-
 <!--end-main-container-part-->
-
 <!--Footer-part-->
-
 <div class="row-fluid">
     <div id="footer" class="span12"> 2017 &copy; MoneyOS Brought to you by <a href="http://www.kindsaving.cn/"></a>kindsaving.cn</div>
 </div>
-
 <!--end-Footer-part-->
-
-
 </body>
 </html>

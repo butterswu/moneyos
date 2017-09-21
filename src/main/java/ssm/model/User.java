@@ -11,6 +11,7 @@ public class User {
     private int userPosition;
     private String userCname;
     private List<Role> roleList;
+    private List<User> subordinate;
 
     @Override
     public String toString() {
@@ -21,7 +22,16 @@ public class User {
                 ", userPosition=" + userPosition +
                 ", userCname='" + userCname + '\'' +
                 ", roleList=" + roleList +
+                ", subordinate=" + subordinate +
                 '}';
+    }
+
+    public List<User> getSubordinate() {
+        return subordinate;
+    }
+
+    public void setSubordinate(List<User> subordinate) {
+        this.subordinate = subordinate;
     }
 
     public List<Role> getRoleList() {
@@ -72,6 +82,4 @@ public class User {
     public void setUserCname(String userCname) {
         this.userCname = userCname;
     }
-
-
 }

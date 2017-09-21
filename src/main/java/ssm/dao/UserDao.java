@@ -16,7 +16,7 @@ public interface UserDao {
     User login(User user);
     int getUserLevelIdByUserName(String userName);
     User getShiroByUserName(String userName);
-
+    List<User> getSalesmanSubList(String id);
 
 }
 

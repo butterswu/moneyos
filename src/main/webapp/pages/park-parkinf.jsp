@@ -206,7 +206,6 @@
 
         <li ><a href="<%=basePath%>client/managerlist"><i class="icon icon-th"></i> <span>客户管理</span></a></li>
         <li class="active"> <a href="<%=basePath%>park/parklist"><i class="icon icon-signal"></i> <span>园区管理</span></a> </li>
-        <li class="bg_lo"> <a href="<%=basePath%>user/account"> <i class="icon-th"></i>账号管理</a> </li>
     </ul>
 </div>
 <div id="content">
