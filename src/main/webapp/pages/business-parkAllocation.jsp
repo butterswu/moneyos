@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="pages/css/matrix-style.css" />
     <link rel="stylesheet" href="pages/css/matrix-media.css" />
     <link href="pages/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="pages/css/common.css" />
     <script src="pages/js/jquery.min.js"></script>
     <script src="pages/js/jquery.ui.custom.js"></script>
     <script src="pages/js/bootstrap.min.js"></script>
@@ -92,57 +94,23 @@
 
 </head>
 <body>
-
-<!--Header-part-->
-<div id="header">
-    <h1><a href="dashboard.html">MoneyOS</a></h1>
+<!--头部导航-->
+<div class="header">
+    <a class="header_logo" href="/"></a>
 </div>
-<!--close-Header-part-->
-
-
-<!--top-Header-menu-->
-<div id="user-nav" class="navbar navbar-inverse">
-    <ul class="nav">
-
-        <ul class="dropdown-menu">
-        </ul>
-        </li>
-        <ul class="dropdown-menu">
-        </ul>
-        </li>
-
-    </ul>
-</div>
-<!--close-top-Header-menu-->
-<!--start-top-serch-->
-<div id="search">
-
-</div>
-<!--close-top-serch-->
-<!--sidebar-menu-->
-<div id="sidebar"><a href="pages/index.jsp" class="visible-phone"><i class="icon icon-home"></i>总览</a>
-    <ul>
-
-        <li ><a href="pages/index.jsp"><i class="icon icon-home"></i> <span>总览</span></a> </li>
-
-        <li><a href="<%=basePath%>client/managerlist"><i class="icon icon-th"></i> <span>客户管理</span></a></li>
-        <li> <a href="<%=basePath%>park/parklist"><i class="icon icon-signal"></i> <span>园区管理</span></a> </li>
-
-
-        <li class="submenu active"> <a href="#"><i class="icon icon-th-list"></i> <span>权限管理</span> <span class="label label-important">2</span></a>
-            <ul>
-                <li><a href="#">人员管理</a></li>
-                <li class="active"><a href="<%=basePath%>business/parkAllocation">园区分配</a></li>
-
+<!--侧导航-->
+<div class="sidemenu">
+    <ul class="control_sidemenu">
+        <li class="main_menu icon_a"><a href="pages/index.jsp">总览</a></li>
+        <li class="main_menu icon_b"><a href="<%=basePath%>client/managerlist">客户管理</a></li>
+        <li class="main_menu icon_b"><a href="<%=basePath%>park/parklist">园区管理</a></li>
+        <li class="active_main_menu main_menu icon_c"><a>权限管理</a></li>
+            <ul class="sub_menu_box sub_menu_box_s">
+                <li class="sub_menu"><a href="#">人员管理</a></li>
+                <li class="active_sub_menu sub_menu"><a href="<%=basePath%>business/parkAllocation">园区分配</a></li>
             </ul>
-        </li>
-
-
     </ul>
 </div>
-<!--sidebar-menu-->
-
-<!--main-container-part-->
 <div id="content">
     <!--breadcrumbs-->
     <div id="content-header">
@@ -179,11 +147,7 @@
         </table>
     </div>
 </div>
-<!--end-main-container-part-->
-<!--Footer-part-->
-<div class="row-fluid">
-    <div id="footer" class="span12"> 2017 &copy; MoneyOS Brought to you by <a href="http://www.kindsaving.cn/"></a>kindsaving.cn</div>
-</div>
-<!--end-Footer-part-->
+
+<script src="pages/js/common.js"></script>
 </body>
 </html>

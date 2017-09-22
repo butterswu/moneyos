@@ -204,12 +204,16 @@
     <a class="header_logo" href="/"></a>
 </div>
 <!--侧导航-->
-<div id="sidebar-s" class="sidemenu">
+<div class="sidemenu">
     <ul class="control_sidemenu">
-        <li><a href="pages/index.jsp"><span></span>总览</a></li>
-        <li><a href="<%=basePath%>client/managerlist"><span></span>客户管理</a></li>
-        <li><a class="active_menu" href="<%=basePath%>park/parklist"><span></span>园区管理</a></li>
-
+        <li class="main_menu icon_a"><a href="pages/index.jsp">总览</a></li>
+        <li class="main_menu icon_b"><a href="<%=basePath%>client/managerlist">客户管理</a></li>
+        <li class="active_main_menu main_menu icon_b"><a href="<%=basePath%>park/parklist">园区管理</a></li>
+        <li class="main_menu icon_c"><a>权限管理</a></li>
+        <ul class="sub_menu_box"">
+            <li class="sub_menu"><a href="#">人员管理</a></li>
+            <li class="sub_menu"><a href="<%=basePath%>business/parkAllocation">园区分配</a></li>
+        </ul>
     </ul>
 </div>
 <!--主体显示-->
@@ -304,13 +308,8 @@
         </div>
     </div>
 </div>
-<!--Footer-part-->
-<div class="row-fluid">
-    <div id="footer" class="span12"> 2017 &copy; MoneyOS. Brought to you by <a href="http://www.kindsaving.cn/">kindsaving.cn</a> </div>
-</div>
-<!--end-Footer-part-->
 
-
+<script src="pages/js/common.js"></script>
 </body>
 </html>
 
