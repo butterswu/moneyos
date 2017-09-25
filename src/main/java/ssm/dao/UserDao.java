@@ -1,6 +1,7 @@
 package ssm.dao;
 
 import org.springframework.stereotype.Repository;
+import ssm.model.Park;
 import ssm.model.User;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public interface UserDao {
     int getUserLevelIdByUserName(String userName);
     User getShiroByUserName(String userName);
     List<User> getSalesmanSubList(String id);
+    String getSuperiorId(String id);
+    List<String> hasRole(String role,String id);
 
 }
 

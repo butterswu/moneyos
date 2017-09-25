@@ -47,4 +47,7 @@
         select * from mos_salesman_relationship WHERE  sup_id=#{id}
         )sp LEFT JOIN mos_user u on sp.sub_id=u.id
     </select>
+    <select id="getSuperiorId" resultType="String">
+        SELECT sup_id from mos_salesman_relationship where sub_id=#{id}
+    </select>
 </mapper>

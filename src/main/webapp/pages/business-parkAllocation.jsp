@@ -41,7 +41,7 @@
             var getAllSub=function (userList,prename) {
                 $.each(userList,function (index,user) {
                     var name=prename+user.userCname;
-                    $("#managertable").append("<tr><td>"+name+"</td><td><input type='radio' name='chose'></td></tr>")
+                    $("#managertable").append("<tr><td>"+name+"</td><td><input type='radio' name='chose' value='"+user.id+"' user_name='"+name+"'></td></tr>")
                     getAllSub(user.subordinate,name)
                 })
             }
@@ -80,7 +80,6 @@
             $(document).ready(function(){
                 getControlledParkList();
                 getSubList();
-
             });
             $("#allocatebutton").click(function () {
                 var obj=document.getElementsByName("checkedpark");
@@ -92,6 +91,32 @@
                 alert(a)
 
             })
+            var allocateWindow=function () {
+                var id=$("input[name='chose']:checked").val();
+                var name=$("input[name='chose']:checked").attr("user_name");
+                if(id==null){
+                    alert("请选择要进行操作的对象")
+                }
+                else {
+                    $.ajax({
+                        type: "POST",
+                        url:"<%=basePath%>business/getAllocateWindow",
+                        dataType: "json",
+                        data:{"id":id},
+                        success:function (result) {
+                            $("#chosedname").html(name)
+
+                        }
+                    })
+                    $("#myModal").modal("show");
+                }
+
+            }
+            $("#start_allocate").click(function () {
+                allocateWindow();
+
+            })
+
 
         })
     </script>
@@ -134,13 +159,10 @@
 
         <li><a href="<%=basePath%>client/managerlist"><i class="icon icon-th"></i> <span>客户管理</span></a></li>
         <li> <a href="<%=basePath%>park/parklist"><i class="icon icon-signal"></i> <span>园区管理</span></a> </li>
-
-
-        <li class="submenu active"> <a href="#"><i class="icon icon-th-list"></i> <span>权限管理</span> <span class="label label-important">2</span></a>
+        <li class="submenu active"> <a href="#"><i class="icon icon-th-list"></i> <span>权限管理</span> <span class="label label-important"></span></a>
             <ul>
                 <li><a href="#">人员管理</a></li>
                 <li class="active"><a href="<%=basePath%>business/parkAllocation">园区分配</a></li>
-
             </ul>
         </li>
 
@@ -182,7 +204,7 @@
             </tbody>
         </table>
     </div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    <button type="button" class="btn btn-primary" <%--data-toggle="modal" data-target="#myModal"--%> id="start_allocate">
          分配园区
     </button>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -195,6 +217,7 @@
 
                       <div class="modal-body">
             <div class="row pre-scrollable">
+                操作对象:<div id="chosedname">????</div>
             <table class="table table-bordered ">
                 <thead>
                 <tr>

@@ -5,6 +5,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import ssm.dao.ParkDao;
 import ssm.dao.UserDao;
 import ssm.model.Park;
@@ -12,8 +13,10 @@ import ssm.model.User;
 import ssm.service.BusinessService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -37,8 +40,6 @@ public class BusinessServiceImpl implements BusinessService{
                     }
                 }
             }
-
-
         }
 
         List<Park> parkList =this.parkDao.getParkListByIdList(controlledIdList);
@@ -63,5 +64,14 @@ public class BusinessServiceImpl implements BusinessService{
             }
         }
         return user;
+    }
+
+    public List<Park> getSuperiorParkList(HttpServletRequest request, Model model) {
+        String id=this.userDao.getSuperiorId(request.getParameter("id"));
+        model.addAttribute("superiorId",id);
+        Set<String> supListId;
+
+        System.out.println(model);
+        return null;
     }
 }

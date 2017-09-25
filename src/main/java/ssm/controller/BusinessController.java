@@ -21,6 +21,14 @@ import java.util.List;
 public class BusinessController {
     @Resource
     private BusinessService businessService;
+    @ResponseBody
+    @RequestMapping("getAllocateWindow")
+    public String getAllocateWindow(HttpServletRequest request,Model model){
+        model.addAttribute("id",request.getParameter("id"));
+        this.businessService.getSuperiorParkList(request,model);
+
+        return null;
+    }
     @RequestMapping("/parkAllocation")
     public String parkAllocation (){
         //返回一个parklist
