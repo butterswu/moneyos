@@ -26,14 +26,19 @@ public class BusinessServiceImpl implements BusinessService{
         List<Integer> idList=this.parkDao.getParkIdList();
         List<Integer> controlledIdList=new ArrayList<Integer>();
         Subject subject= SecurityUtils.getSubject();
-        if (subject.hasRole("salesman:single_sign")){
-            System.out.println("you");
 
-            for (int id:idList){
-                if(subject.hasRole("salesman:single:"+id)){
-                    controlledIdList.add(id);
+        if (subject.hasRole("salesman:single_sign")){
+            if (subject.hasRole("salesman:single:*")){
+                controlledIdList.addAll(idList);
+            }else{
+                for (int id:idList){
+                    if(subject.hasRole("salesman:single:"+id)){
+                        controlledIdList.add(id);
+                    }
                 }
             }
+
+
         }
 
         List<Park> parkList =this.parkDao.getParkListByIdList(controlledIdList);

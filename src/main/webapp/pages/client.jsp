@@ -185,9 +185,6 @@
                 $("#create").show();
             })
 
-
-
-
             $("#selectByManager").on('input propertychange',function () {
                 manager=$(this).val();
                 getmanagerbypage();

@@ -41,7 +41,7 @@
             var getAllSub=function (userList,prename) {
                 $.each(userList,function (index,user) {
                     var name=prename+user.userCname;
-                    $("#managertable").append("<tr><td>"+name+"</td></tr>")
+                    $("#managertable").append("<tr><td>"+name+"</td><td><input type='radio' name='chose'></td></tr>")
                     getAllSub(user.subordinate,name)
                 })
             }
@@ -53,15 +53,12 @@
                     success:function (result) {
                         var tableinf="";
                         var parkList=$.parseJSON(result);
-
                         $.each(parkList,function (index,item) {
                             tableinf+="<tr><td>"+item.parkName+"</td></tr>"
-
                         })
                         $("#parktable").html(tableinf);
                     }
                 })
-
             }
             var getSubList=function () {
                 $.ajax({
@@ -85,6 +82,16 @@
                 getSubList();
 
             });
+            $("#allocatebutton").click(function () {
+                var obj=document.getElementsByName("checkedpark");
+                var s="";
+                var a=new Array();
+                for(var i=0; i<obj.length; i++){
+                    if(obj[i].checked) a.push(obj[i].id); //如果选中，将value添加到变量s中
+                }
+                alert(a)
+
+            })
 
         })
     </script>
@@ -156,12 +163,11 @@
             <thead>
             <tr>
                 <th>园区名称</th>
-                <th>园区详细</th>
             </tr>
             </thead>
             <tbody id="parktable">
             </tbody>
-        </table><button type="button">分配园区</button>
+        </table>
     </div>
     <div class="widget-content nopadding">
         <h2>可管理人员</h2>
@@ -169,14 +175,67 @@
             <thead>
             <tr>
                 <th>人员姓名</th>
-                <th>所管理园区</th>
-                <th>下级信息</th>
-                <th>分配园区</th>
+                <th>选择</th>
             </tr>
             </thead>
             <tbody id="managertable">
             </tbody>
         </table>
+    </div>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+         分配园区
+    </button>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">园区分配</h4>
+                      </div>
+
+                      <div class="modal-body">
+            <div class="row pre-scrollable">
+            <table class="table table-bordered ">
+                <thead>
+                <tr>
+                    <th>可分配园区</th>
+
+                </tr>
+                </thead>
+                <tbody id="available">
+                <tr><td>长阳股<input type="checkbox"></tr>
+                <tr><td>长阳股<input type="checkbox"></tr>
+                <tr><td>长阳股<input type="checkbox"></tr>
+
+                </tbody>
+            </table>
+            </div>
+            <div>
+                <button>↓</button>
+                <button>↑</button>
+            </div>
+            <div class="row pre-scrollable" >
+                <table class="table table-bordered ">
+                    <thead>
+                    <tr>
+                        <th>已分配园区园区</th>
+                    </tr>
+                    </thead>
+                    <tbody id="get">
+                    <tr><td>长阳股<input type="checkbox"></tr>
+                    <tr><td>长阳股<input type="checkbox"></tr>
+                    <tr><td>长阳股<input type="checkbox"></tr>
+                    </tbody>
+                </table>
+            </div>
+               
+                      </div>
+                      <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
+                        <button class="btn btn-primary" type="button">提交</button>
+                      </div>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
     </div>
 </div>
 <!--end-main-container-part-->
