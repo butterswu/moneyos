@@ -36,8 +36,11 @@
     <script src="pages/js/matrix.tables.js"></script>
     <script type="text/javascript">
         $(function (){
-
-
+            var oriPark=new Array();
+            var nowPark=new Array();
+            var addPark=new Array();
+            var cutPark=new Array();
+            var userid;
             var getAllSub=function (userList,prename) {
                 $.each(userList,function (index,user) {
                     var name=prename+user.userCname;
@@ -93,7 +96,8 @@
             })
             var allocateWindow=function () {
                 var id=$("input[name='chose']:checked").val();
-                var name=$("input[name='chose']:checked").attr("user_name");
+                userid=id;
+                var chosedName=$("input[name='chose']:checked").attr("user_name");
                 if(id==null){
                     alert("请选择要进行操作的对象")
                 }
@@ -104,8 +108,26 @@
                         dataType: "json",
                         data:{"id":id},
                         success:function (result) {
-                            $("#chosedname").html(name)
 
+                            $("#chosedname").html(chosedName)
+                            var parks=$.parseJSON(result)
+                            var str1=""
+                            var str2=""
+                            oriPark=[]
+                            $.each(parks.supPark,function (index,sup) {
+                                str1+="<tr><td>"+sup.parkName+"</td><td><input type='checkbox' name='avaliablePark' parkid='"+sup.id+"' parkname='"+sup.parkName+"'></td></tr>"
+                            })
+                            $("#available").html(str1);
+                            $.each(parks.thisPark,function (index,item) {
+                                oriPark.push(item.id)
+                                str2+="<tr><td>"+item.parkName+"</td><td><input type='checkbox' name='chosenPark' parkid='"+item.id+"' parkname='"+item.parkName+"'></td></tr>"
+                            })
+                            $("#get").html(str2);
+
+                        },
+                        error:function () {
+                            $("#chosedname").html(chosedName)
+                            alert("该对象上级可分配园区为空")
                         }
                     })
                     $("#myModal").modal("show");
@@ -113,11 +135,64 @@
 
             }
             $("#start_allocate").click(function () {
+                $("#available").html("");
+                $("#get").html("")
                 allocateWindow();
+            })
+            $("#down").click(function () {
+                var str=""
+                $('input[type="checkbox"][name="avaliablePark"]:checked').each(
+                    function() {
+                        str+="<tr><td>"+$(this).attr("parkname")+"</td><td><input type='checkbox' name='chosenPark' parkid='"+$(this).attr("parkid")+"' parkname='"+$(this).attr("parkname")+"'></td></tr>"
+                        $(this).parent().parent().remove();
+                    }
+                );
+                $("#get").append(str)
 
             })
+            $("#up").click(function () {
+                var str=""
+                $('input[type="checkbox"][name="chosenPark"]:checked').each(function () {
+                    str+="<tr><td>"+$(this).attr("parkname")+"</td><td><input type='checkbox' name='avaliablePark' parkid='"+$(this).attr("parkid")+"' parkname='"+$(this).attr("parkname")+"'></td></tr>"
+                    $(this).parent().parent().remove();
+                });
+                $("#available").append(str)
+
+            })
+            $("#saveAllocate").click(function () {
+                nowPark=[]
+                var a=-1
+                $('input[type="checkbox"][name="chosenPark"]').each(function () {
+                    nowPark.push(parseInt($(this).attr("parkid")));
+                })
+                $(nowPark).each(function (index1,now) {
+                    if($.inArray(now,oriPark)==a){
+                        addPark.push(now)
+                    }
+                })
+                $(oriPark).each(function (index2,ori) {
+                    if($.inArray(ori,nowPark)==a){
+                        cutPark.push(ori)
+                    }
+                })
+                var addParkJson=JSON.stringify(addPark)
+                var cutParkJson=JSON.stringify(cutPark)
 
 
+                $.ajax({
+                    type: "POST",
+                    url:"<%=basePath%>business/allocatePark",
+                    dataType:"json",
+                    data:{"addPark":addParkJson,"cutPark":cutParkJson,"userid":userid},
+                    success:function () {
+                        alert("修改成功")
+                    }
+                })
+                addPark=[]
+                cutPark=[]
+
+
+            })
         })
     </script>
 
@@ -222,32 +297,27 @@
                 <thead>
                 <tr>
                     <th>可分配园区</th>
+                    <th>选择</th>
 
                 </tr>
                 </thead>
                 <tbody id="available">
-                <tr><td>长阳股<input type="checkbox"></tr>
-                <tr><td>长阳股<input type="checkbox"></tr>
-                <tr><td>长阳股<input type="checkbox"></tr>
-
                 </tbody>
             </table>
             </div>
             <div>
-                <button>↓</button>
-                <button>↑</button>
+                <button id="down">↓</button>
+                <button id="up">↑</button>
             </div>
-            <div class="row pre-scrollable" >
-                <table class="table table-bordered ">
+            <div class="row pre-scrollable">
+                <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>已分配园区园区</th>
+                        <th>已分配园区</th>
+                        <th>选择</th>
                     </tr>
                     </thead>
                     <tbody id="get">
-                    <tr><td>长阳股<input type="checkbox"></tr>
-                    <tr><td>长阳股<input type="checkbox"></tr>
-                    <tr><td>长阳股<input type="checkbox"></tr>
                     </tbody>
                 </table>
             </div>
@@ -255,7 +325,7 @@
                       </div>
                       <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
-                        <button class="btn btn-primary" type="button">提交</button>
+                        <button class="btn btn-primary" type="button" id="saveAllocate">提交</button>
                       </div>
                     </div><!-- /.modal-content -->
                   </div><!-- /.modal-dialog -->

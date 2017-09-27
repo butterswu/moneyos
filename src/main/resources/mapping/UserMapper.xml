@@ -50,4 +50,30 @@
     <select id="getSuperiorId" resultType="String">
         SELECT sup_id from mos_salesman_relationship where sub_id=#{id}
     </select>
+    <select id="hasRole" resultType="String">
+        SELECT id from
+        (
+        select * FROM
+        (
+        SELECT * from mos_user_role where user_id=#{id}
+        ) rl LEFT JOIN mos_role r on rl.role_id=r.id
+        )rr where rr.role_name=#{roleName}
+    </select>
+    <insert id="addRole">
+        INSERT INTO mos_user_role (user_id,role_id) VALUES
+        (#{id},(select id from mos_role where role_name=#{roleName}))
+    </insert>
+    <select id="hasRoleData" resultType="String">
+        select role_name from mos_role where role_name=#{roleName}
+    </select>
+    <select id="addRoleData">
+        INSERT into mos_role (role_name) VALUE (#{roleName})
+    </select>
+    <delete id="cutRole">
+        DELETE FROM mos_user_role WHERE user_id=#{id} AND
+        role_id=
+        (
+        select id FROM mos_role where role_name=#{roleName}
+        )
+    </delete>
 </mapper>

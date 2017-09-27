@@ -74,6 +74,15 @@
 
         </foreach>
     </select>
+    <select id="getParkIdSet" resultType="String">
+        SELECT id from mos_park
+    </select>
+    <select id="getParkSetByIdSet" resultMap="ParkBaseMap">
+        SELECT * FROM mos_park WHERE id IN
+        <foreach collection="set" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
 
 
 </mapper>

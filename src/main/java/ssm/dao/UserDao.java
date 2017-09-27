@@ -1,5 +1,6 @@
 package ssm.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import ssm.model.Park;
 import ssm.model.User;
@@ -19,7 +20,10 @@ public interface UserDao {
     User getShiroByUserName(String userName);
     List<User> getSalesmanSubList(String id);
     String getSuperiorId(String id);
-    List<String> hasRole(String role,String id);
-
+    String hasRole(@Param("id") String id,@Param("roleName") String roleName);
+    void addRole(@Param("id") String id,@Param("roleName") String roleName);
+    String hasRoleData(String roleName);
+    void addRoleData(String roleName);
+    void cutRole(@Param("id") String id,@Param("roleName")String roleName);
 }
 

@@ -12,4 +12,5 @@ public interface BusinessService {
     List<Park> getControlledParkList();
     List<User> getSalesManSubList();
     List<Park> getSuperiorParkList(HttpServletRequest request, Model model);
+    String  allocatePark(List<String> addList,List<String> subList,String userid);
 }
