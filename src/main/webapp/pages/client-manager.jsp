@@ -188,7 +188,7 @@
     <div id="content-header">
         <div id="breadcrumb"> <a href="pages/index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>总览</a> <a href="<%=basePath%>client/managerlist" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 客户管理</a><a  class="icon-current">联系人信息</a>  </div>
         <h1>联系人
-            <form action="<%=basePath%>client/companyinf">  <input type="hidden" name="id" value="${manager.manComId}"><button data-dismiss="modal" class="btn btn-primary" ><span aria-hidden="true"></span><span class="sr-only">转到公司信息</span></button></form></h1>
+            <form action="<%=basePath%>client/companyinf">  <input type="hidden" name="id" value="${manager.manComId}"><button data-dismiss="modal" class="btn btn-primary" ><span aria-hidden="true"></span><span class="sr-only">转到单位信息</span></button></form></h1>
     </div>
     <div class="container-fluid">
         <hr>
@@ -219,7 +219,7 @@
                                     </div>
 
                                     <div class="control-group">
-                                        <label class="control-label">所属公司 :</label>
+                                        <label class="control-label">所属单位 :</label>
                                         <div class="controls">
                                             <input type="text"  class="span4" name="comTargetDate" value="${manager.company.comName}" disabled>
                                         </div>

@@ -1,5 +1,7 @@
 package ssm.model;
 
+import java.util.Set;
+
 public class SelectInf {
     private int i0;
     private int i1;
@@ -10,6 +12,8 @@ public class SelectInf {
     private int pageSize;
     private String companyName;
     private String managername;
+    private Set<String> avaManIdSet;
+    private Set<String> avaComIdSet;
 
     @Override
     public String toString() {
@@ -23,7 +27,25 @@ public class SelectInf {
                 ", pageSize=" + pageSize +
                 ", companyName='" + companyName + '\'' +
                 ", managername='" + managername + '\'' +
+                ", avaManIdSet=" + avaManIdSet +
+                ", avaComIdSet=" + avaComIdSet +
                 '}';
+    }
+
+    public Set<String> getAvaManIdSet() {
+        return avaManIdSet;
+    }
+
+    public void setAvaManIdSet(Set<String> avaManIdSet) {
+        this.avaManIdSet = avaManIdSet;
+    }
+
+    public Set<String> getAvaComIdSet() {
+        return avaComIdSet;
+    }
+
+    public void setAvaComIdSet(Set<String> avaComIdSet) {
+        this.avaComIdSet = avaComIdSet;
     }
 
     public int getI4() {

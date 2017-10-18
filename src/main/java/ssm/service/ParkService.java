@@ -5,6 +5,7 @@ import ssm.model.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Set;
 
 public interface ParkService {
     Page getParkPage(HttpServletRequest request, Model model);
@@ -19,6 +20,7 @@ public interface ParkService {
     void newPark(Park park);
     List<Park> getAllPark();
     void newCompanyRoom(HttpServletRequest request,Model model,ComRoom comRoom);
-
+    Set<String> getAvaParkIdSet();
+    List<Park> getAllNameId();
 
 }

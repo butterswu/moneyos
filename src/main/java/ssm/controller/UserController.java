@@ -7,11 +7,13 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import ssm.model.User;
 import ssm.service.UserService;
@@ -72,5 +74,22 @@ public class UserController {
     @RequestMapping("/account")
     public String Account(HttpServletRequest request,Model model){
         return "account";
+    }
+    @RequestMapping("/hasRole")
+    @ResponseBody
+    public String hasRole(String roleName){
+        Subject subject=SecurityUtils.getSubject();
+        if (subject.isPermitted("park:*:*")){
+            return "1";
+        }
+        if (subject.hasRole(roleName)){
+            System.out.println("1");
+            return "1";
+        }
+        else {
+            System.out.println("2");
+            return "2";
+
+        }
     }
 }

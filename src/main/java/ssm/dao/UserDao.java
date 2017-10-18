@@ -25,5 +25,7 @@ public interface UserDao {
     String hasRoleData(String roleName);
     void addRoleData(String roleName);
     void cutRole(@Param("id") String id,@Param("roleName")String roleName);
+    void addPermissionData(String permissionName);
+    void addRolePermission(@Param("roleName") String roleName,@Param("permissionName") String permissionName);
 }
 

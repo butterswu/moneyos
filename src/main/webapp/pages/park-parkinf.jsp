@@ -303,13 +303,13 @@
 
                             </div>
                             <div class="control-group">
-                                <h4 class="modal-title">园区入驻公司</h4>
+                                <h4 class="modal-title">园区入驻单位</h4>
 
                                 <table class="table table-bordered ">
                                     <thead>
                                     <tr>
-                                        <th>公司名称</th>
-                                        <th>公司详细</th>
+                                        <th>单位名称</th>
+                                        <th>单位详细</th>
 
 
                                     </tr>

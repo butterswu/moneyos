@@ -23,5 +23,53 @@
     <insert id="newRecord">
         INSERT INTO mos_record (re_man_id,re_intention,re_inf) VALUES (#{reManId},#{reIntention},#{reInf})
     </insert>
+    <insert id="addFjs">
+        INSERT INTO fjs_record_copy_copy(answerTime,
+                              callMode,
+                              callStatus,
+                              callType,
+                              callee,
+                              calleeAppType,
+                              calleeAppVersion,
+                              caller,
+                              callerAppType,
+                              callerAppVersion,
+                              deptId,
+                              deptName,
+                              duration,
+                              empAccount,
+                              empEmail,
+                              empId,
+                              empName,
+                              endTime,
+                              recordId,
+                              recordingUrl,
+                              source,
+                              startTime,
+                              totalDuration)VALUES (
+                              #{r.answerTime},
+                              #{r.callMode},
+                              #{r.callStatus},
+                              #{r.callType},
+                              #{r.callee},
+                              #{r.calleeAppType},
+                              #{r.calleeAppVersion},
+                              #{r.caller},
+                              #{r.callerAppType},
+                              #{r.callerAppVersion},
+                              #{r.deptId},
+                              #{r.deptName},
+                              #{r.duration},
+                              #{r.empAccount},
+                              #{r.empEmail},
+                              #{r.empId},
+                              #{r.empName},
+                              #{r.endTime},
+                              #{r.recordId},
+                              #{r.recordingUrl},
+                              #{r.source},
+                              #{r.startTime},
+                              #{r.totalDuration})
+    </insert>
 
 </mapper>

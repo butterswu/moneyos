@@ -1,5 +1,7 @@
 package ssm.service.impl;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -13,7 +15,9 @@ import ssm.service.ParkService;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -106,4 +110,27 @@ public class ParkServiceImpl implements ParkService{
         this.buildingDao.newCompanyRoom(comRoom);
 
             }
+    public Set<String> getAvaParkIdSet(){
+        Set<String> idSet=this.parkDao.getParkIdSet();
+        Set<String> avaIdSet=new HashSet<String>();
+        Subject subject= SecurityUtils.getSubject();
+
+        if (subject.hasRole("salesman:single_sign")){
+            if (subject.hasRole("salesman:single:*")){
+                avaIdSet.addAll(idSet);
+            }else{
+                for (String id1:idSet){
+                    if(subject.hasRole("salesman:single:"+id1)){
+                        avaIdSet.add(id1);
+                    }
+                }
+            }
+        }
+        return avaIdSet;
+    }
+
+    public List<Park> getAllNameId() {
+
+        return this.parkDao.getAllNameId();
+    }
 }

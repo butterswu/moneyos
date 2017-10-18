@@ -79,7 +79,7 @@
                             $("#checkresult").show();
                             con = "";
                             $.each(companyList, function (index, item) {
-                                con += "<li>公司全名：" + item.comName + "<button type=\"button\" class=\"b2\" value=\""+item.id+" \" name=\""+item.comName+"\">选择</button></li> ";
+                                con += "<li>单位全名：" + item.comName + "<button type=\"button\" class=\"b2\" value=\""+item.id+" \" name=\""+item.comName+"\">选择</button></li> ";
                             });
                             $("#checkresult").html(con);
                         }
@@ -122,11 +122,7 @@
                     dataType: "json",
                     data:{"pageNow":pagenow,"i0":i0,"i1":i1,"i2":i2,"i3":i3,"i4":i4,"manager":manager,"company":company},
                     success: function(result) {
-
-
-
                         var page = $.parseJSON(result);
-
                         var con="";
                         var i="";
                         var url1="<%=basePath%>client/managerinf";
@@ -213,8 +209,7 @@
         <li><a href="<%=basePath%>park/parklist"><span></span>园区管理</a></li>
         <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>权限管理</span> <span class="label label-important">2</span></a>
             <ul>
-                <li><a href="#">人员管理</a></li>
-                <li><a href="<%=basePath%>business/parkAllocation">园区分配</a></li>
+                <li><a href="<%=basePath%>business/parkAllocation">园区</a></li>
 
             </ul>
         </li>
@@ -233,11 +228,11 @@
 
 
                         <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-                            <h5>按联系人检索</h5><form action="<%=basePath%>client/companyList"> <button type="submit" class="btn btn-primary" >切换为按公司检索</button></form>
+                            <h5>按联系人检索</h5><form action="<%=basePath%>client/companyList"> <button type="submit" class="btn btn-primary" >切换为按单位检索</button></form>
                         </div>
-
+                        <span>检索条件</span><br>
                         <div  data-toggle="buttons">
-                            <span>按意向</span>
+                            <span>意向</span>
                             <label class="btn btn-default " >
                                 <input type="checkbox" id="i0" class="i">已签约
                             </label>
@@ -254,8 +249,8 @@
                                 <input type="checkbox" id="i3" class="i"> C
                             </label>
                         </div>
-                        <span>按联系人</span><input type="text" id="selectByManager"><br>
-                        <span>按公司名</span><input type="text" id="selectByCompany">
+                        <span>联系人</span><input type="text" id="selectByManager"><br>
+                        <span>单位名</span><input type="text" id="selectByCompany">
 
 
                         <div class="widget-content nopadding">
@@ -263,11 +258,11 @@
                                 <thead>
                                 <tr>
                                     <th>姓名</th>
-                                    <th>公司</th>
+                                    <th>单位</th>
                                     <th>意向</th>
                                     <th>电话</th>
                                     <th>联系人详细</th>
-                                    <th>公司详细</th>
+                                    <th>单位详细</th>
                                 </tr>
                                 </thead>
                                 <tbody id="mananagertable">
@@ -293,9 +288,9 @@
                                             </div>
                                         </div>
                                         <div class="control-group" id="company">
-                                            <label class="control-label">公司 :</label>
+                                            <label class="control-label">单位 :</label>
                                             <div class="controls">
-                                                <input type="text" class="span11" placeholder="公司"  id="companyname"/>
+                                                <input type="text" class="span11" placeholder="单位"  id="companyname"/>
                                                 <input type="hidden" name="manComId" value="" id="companyid">
                                             </div>
                                             <div id="checkresult" hidden></div>

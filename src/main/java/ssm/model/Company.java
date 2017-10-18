@@ -13,7 +13,6 @@ public class Company {
     private List<Manager> companyManagerList;
     private List<Room> companyRoomList;
     private List<Park> companyParkList;
-
     @Override
     public String toString() {
         return "Company{" +

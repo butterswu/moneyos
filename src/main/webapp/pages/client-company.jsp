@@ -192,8 +192,8 @@
 </div>
 <div id="content">
     <div id="content-header">
-        <div id="breadcrumb"> <a href="pages/index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>总览</a> <a  title="Go to Home" class="tip-bottom" href="<%=basePath%>client/managerlist"><i class="icon-home"></i> 客户管理</a><a  class="icon-current">公司信息</a>  </div>
-        <h1>公司 </h1>
+        <div id="breadcrumb"> <a href="pages/index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>总览</a> <a  title="Go to Home" class="tip-bottom" href="<%=basePath%>client/managerlist"><i class="icon-home"></i> 客户管理</a><a  class="icon-current">单位信息</a>  </div>
+        <h1>单位 </h1>
     </div>
     <div class="container-fluid">
         <hr>
@@ -205,7 +205,7 @@
                         <form id="updatecompany">
                             <div class="modal-header">
 
-                                <h4 class="modal-title">公司详细信息</h4>
+                                <h4 class="modal-title">单位详细信息</h4>
                                 <h5 id="updatecompanysuccess" align="center" hidden >更新成功</h5>
 
                             </div>
@@ -213,7 +213,7 @@
 
                             <div class="widget-content nopadding">
                                     <div class="control-group">
-                                        <label class="control-label">公司名称 :</label>
+                                        <label class="control-label">单位名称 :</label>
 
                                         <input type="hidden" name="id" value="${company.id}"name="id">
                                         <div class="controls">
@@ -240,7 +240,7 @@
                                     </div>
 
                                    <div class="control-group">
-                                      <label class="control-label">公司信息</label>
+                                      <label class="control-label">单位信息</label>
                                       <div class="controls">
                                         <textarea class="span4" name="comInf">${company.comInf}</textarea>
                                       </div>
@@ -265,7 +265,7 @@
 
                                 <hr>
                                 <h2>位置信息</h2>
-                                <button type="button" id="newroombt">添加公司房间</button>
+                                <button type="button" id="newroombt">添加单位房间</button>
                                 <div class=" clearfix visible-md-block visible-lg-block"  id="create" hidden>
                                     <div class="widget-content nopadding">
                                         <h4 id="newparksuccess" align="center" hidden >添加成功<span id="newroomcount"></span>个房间</h4>

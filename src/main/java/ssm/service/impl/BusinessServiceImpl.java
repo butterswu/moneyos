@@ -27,7 +27,6 @@ public class BusinessServiceImpl implements BusinessService{
         List<Integer> idList=this.parkDao.getParkIdList();
         List<Integer> controlledIdList=new ArrayList<Integer>();
         Subject subject= SecurityUtils.getSubject();
-
         if (subject.hasRole("salesman:single_sign")){
             if (subject.hasRole("salesman:single:*")){
                 controlledIdList.addAll(idList);
@@ -39,7 +38,7 @@ public class BusinessServiceImpl implements BusinessService{
                 }
             }
         }
-
+        System.out.println(controlledIdList);
         List<Park> parkList =this.parkDao.getParkListByIdList(controlledIdList);
         return parkList;
     }
@@ -78,7 +77,6 @@ public class BusinessServiceImpl implements BusinessService{
                 if (supString==thisSting){
                     sup.remove();
                 }
-
             }
             this1=thisListId.iterator();
         }
@@ -92,7 +90,7 @@ public class BusinessServiceImpl implements BusinessService{
         }catch (Exception e){}
         return null;
     }
-    private Set<String> getAvaParkIdSetById(String id){
+    public Set<String> getAvaParkIdSetById(String id){
         Set<String> supListId=new HashSet<String>();
         if(!(this.userDao.hasRole(id,"salesman:single_sign")==null)){
             Set<String> idSet=this.parkDao.getParkIdSet();
@@ -114,12 +112,16 @@ public class BusinessServiceImpl implements BusinessService{
     public String  allocatePark(List<String> addList, List<String> cutList,String userid) {
         if(this.userDao.hasRole(userid,"salesman:single_sign")==null){
             this.userDao.addRole(userid,"salesman:single_sign");
+
         }
         for (String add:addList){
             String str="salesman:single:"+add;
             if(this.userDao.hasRoleData(str)==null){
                 this.userDao.addRoleData(str);
+                String permissionstr="park:*:"+add;
                 this.userDao.addRole(userid,str);
+                this.userDao.addPermissionData(permissionstr);
+                this.userDao.addRolePermission(str,permissionstr);
             }else {
                 this.userDao.addRole(userid,str);
             }

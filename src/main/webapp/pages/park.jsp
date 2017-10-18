@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: wuenze
@@ -47,6 +48,25 @@
 
 
             })
+            var hasRole=function (mas) {
+                var r=false
+                $.ajax({
+                    type:"post",
+                    url:"<%=basePath%>user/hasRole",
+                    data:{"roleName":mas},
+                    dataType:"json",
+                    async: false,
+                    success:function (result) {
+
+                        if(result=="1"){
+                            r=true
+                        }
+
+                    },
+
+                })
+                return r
+            }
             var getparklist = function (pageNow) {
                 $.ajax({
                     type:"post",
@@ -59,11 +79,25 @@
                         var pagenun="";
                         var pinf="";
 
+
                         var url="<%=basePath%>park/parkinf"
+
                         $.each(page.list,function (i,item) {
+
+                            var hasrole=0
+                            var mas="salesman:single:"+item.id
+                            if (hasRole(mas)){
+                                hasrole=1
+                            }
+
                             var location=""
                             location+=""+item.province+""+item.city+""+item.area+"";
-                            table+="<tr class=\" gradeX\"><td>"+item.parkName+"</td><td>"+location+"</td><td>"+item.parkLocation+"</td><td><form action='"+url+"'><input type='hidden' name='id' value='"+item.id+"'><button type='submit' class='btn btn-danger '>查看</button> </form></td></tr>";
+                            if (hasrole==1){
+                                var shiro="<button type='submit' class='btn btn-danger '>查看</button>"
+                            }else {var shiro=""
+                            }
+
+                            table+="<tr class=\" gradeX\"><td>"+item.parkName+"</td><td>"+location+"</td><td>"+item.parkLocation+"</td><td><form action='"+url+"'><input type='hidden' name='id' value='"+item.id+"'>"+shiro+"</form></td></tr>";
 
 
                         })
@@ -217,7 +251,7 @@
     <div id="content-s" class="maincontent">
         <div id="content-header">
             <div id="breadcrumb"> <a href="pages/index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>总览</a> <a href="<%=basePath%>park/parklist" class="icon-home">楼盘管理</a> </div>
-            <h1>园区管理</h1>
+            <shiro:hasRole name="salesman:single_sign">aaa</shiro:hasRole><h1>园区管理</h1>
         </div>
         <div class="container-fluid">
             <hr>

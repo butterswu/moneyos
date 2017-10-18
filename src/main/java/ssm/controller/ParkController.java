@@ -123,5 +123,10 @@ public class ParkController {
         this.parkService.newCompanyRoom(request,model,comRoom);
         return "success";
     }
+    @RequestMapping("/getAllNameId")
+    @ResponseBody
+    public String getAllNameId(){
+        return JSON.toJSONString(this.parkService.getAllNameId());
+    }
 
 }

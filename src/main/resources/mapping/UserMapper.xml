@@ -76,4 +76,16 @@
         select id FROM mos_role where role_name=#{roleName}
         )
     </delete>
+    <insert id="addPermissionData">
+        INSERT into mos_permission (permission_name) VALUE (#{permissionName})
+    </insert>
+    <insert id="addRolePermission">
+        INSERT into mos_role_permission
+        (role_id,permission_id)
+        VALUES
+        (
+        (SELECT id from mos_role WHERE role_name=#{roleName}),
+        (SELECT id from mos_permission where permission_name=#{permissionName})
+        )
+    </insert>
 </mapper>

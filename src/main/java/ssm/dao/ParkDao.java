@@ -25,4 +25,5 @@ public interface ParkDao {
     List<Park> getParkListByIdList(List<Integer> idList);
     Set<String> getParkIdSet();
     Set<Park> getParkSetByIdSet(@Param("set") Set<String> set);
+    List<Park> getAllNameId();
 }

@@ -9,10 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import ssm.model.Company;
-import ssm.model.Manager;
-import ssm.model.Page;
-import ssm.model.Record;
+import ssm.model.*;
 
 import ssm.service.CompanyService;
 import ssm.service.ManagerService;
@@ -134,10 +131,8 @@ public class ClientController {
     }
     @RequestMapping("/ajaxgetCompanyByPage")
     @ResponseBody
-    public  String ajaxgetCompanyByPage(HttpServletRequest request,Model model){
-
-        Page page=this.companyService.ajaxgetCompanyByPage(request,model);
-        System.out.println(page);
+    public  String ajaxgetCompanyByPage(HttpServletRequest request, Model model, SelectInf selectInf){
+        Page page=this.companyService.ajaxgetCompanyByPage(request,model,selectInf);
         String str =JSON.toJSONString(page);
         return str;
     }

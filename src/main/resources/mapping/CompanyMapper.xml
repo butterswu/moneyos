@@ -9,9 +9,26 @@
         <result column="com_num" property="comNum" jdbcType="VARCHAR"/>
         <result column="com_target_date" property="comTargetDate" jdbcType="VARCHAR"/>
         <result column="com_inf" property="comInf" jdbcType="VARCHAR"/>
-
-
-
+        <collection property="companyParkList" ofType="ssm.model.Park">
+            <id column="pid" property="id" jdbcType="BIGINT"/>
+            <result column="park_province" property="parkProvince" jdbcType="VARCHAR"/>
+            <result column="park_city" property="parkCity" jdbcType="VARCHAR"/>
+            <result column="park_district" property="parkDistrict" jdbcType="VARCHAR"/>
+            <result column="park_name" property="parkName" jdbcType="VARCHAR"/>
+            <result column="park_location" property="parkLocation" jdbcType="VARCHAR"/>
+            <result column="park_areaID" property="parkAreaID" jdbcType="VARCHAR"/>
+            <result column="area" property="area" jdbcType="VARCHAR"/>
+            <result column="province" property="province" jdbcType="VARCHAR"/>
+            <result column="city" property="city" jdbcType="VARCHAR"/>
+        </collection>
+        <collection property="companyManagerList" ofType="ssm.model.Manager">
+            <id column="mid" property="id" jdbcType="BIGINT"/>
+            <result column="man_name" property="manName" jdbcType="VARCHAR"/>
+            <result column="man_com_id" property="manComId" jdbcType="BIGINT"/>
+            <result column="man_intention" property="manIntention" jdbcType="TINYINT"/>
+            <result column="man_tel" property="manTel" jdbcType="VARCHAR"/>
+            <result column="man_email" property="manEmail" jdbcType="VARCHAR"/>
+        </collection>
     </resultMap>
     <select id="getCompanyListByParkId" resultMap="CompanyBaseMap">
         SELECT c.* FROM
@@ -32,10 +49,52 @@
         INSERT INTO mos_company (com_name, com_count, com_num, com_inf) VALUES (#{comName}, #{comCount}, #{comNum}, #{comInf})
     </insert>
     <select id="getCompanyList" resultMap="CompanyBaseMap">
-        SELECT * FROM mos_company limit ${startPos},${pageSize}
+<!--
+        SELECT c.* FROM
+         (SELECT * FROM mos_company WHERE id IN
+        <foreach collection="avaComIdSet" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+         )c
+         limit ${startPos},${pageSize}-->
+/*        SELECT * from
+        (
+        select b.building_park_id pid,cr.* from
+        (
+        select r.room_building_id bid,crid.* from
+        (
+        select  mrc.room_id rid,c.* from (
+        select * from mos_company
+        )c LEFT JOIN mos_room_com mrc on c.id=mrc.com_id
+        )crid LEFT JOIN mos_room r on r.id= crid.rid
+        )cr LEFT JOIN mos_building b on b.id=cr.bid
+        )cb LEFT JOIN mos_park p on p.id = cb.pid
+        LIMIT 30,10*/
+        select m.man_name,m.id mid ,cp.* FROM
+        (
+        SELECT cb.*,p.park_name from
+        (
+        select b.building_park_id pid,cr.* from
+        (
+        select r.room_building_id bid,crid.* from
+        (
+        select  mrc.room_id rid,c.* from (
+        select * from mos_company where id IN
+        <foreach collection="avaComIdSet" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        )c LEFT JOIN mos_room_com mrc on c.id=mrc.com_id
+        )crid LEFT JOIN mos_room r on r.id= crid.rid
+        )cr LEFT JOIN mos_building b on b.id=cr.bid
+        )cb LEFT JOIN mos_park p on p.id = cb.pid
+        )cp LEFT JOIN mos_manager m on m.man_com_id=cp.id
+        ORDER BY id
     </select>
     <select id="getCompanyCount" resultType="long">
-        SELECT COUNT(*)FROM  mos_company
+        SELECT COUNT(*)FROM  mos_company WHERE id IN
+        <foreach collection="avaComIdSet" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
     </select>
     <select id="getCompanyById" resultMap="CompanyBaseMap">
         select
@@ -52,4 +111,134 @@
         SELECT * FROM mos_company WHERE com_name LIKE '%${comName}%'
     </select>
 
+    <select id="getCompanyIdSetByParkIdSet" resultType="String">
+        SELECT c.id FROM
+        (
+        SELECT DISTINCT irc.com_id FROM
+        (
+        SELECT rr.*,rc.* FROM
+        (
+        SELECT r.id FROM
+        (
+        SELECT id   from mos_building WHERE building_park_id in
+        <foreach collection="set" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        )b LEFT JOIN mos_room r on r.room_building_id=b.id
+        )rr RIGHT  JOIN mos_room_com rc on  rr.id=rc.room_id
+        )irc WHERE id is not NULL
+        )irc2 LEFT JOIN mos_company c on irc2.com_id=c.id
+    </select>
+    <select id="getSetByLikeName" resultType="String">
+        SELECT  id from mos_company WHERE com_name LIKE '%${comName}%'
+    </select>
+    <select id="companyFilterCount" resultType="int">
+
+        SELECT  count(DISTINCT id) FROM
+        (
+        select city.father prid,cam.* FROM
+        (
+        select a.father ciid,cpm.* from
+        (
+        select m.id mid ,cp.* FROM
+        (
+        SELECT cb.*,p.park_areaID from
+        (
+        select b.building_park_id pid,cr.* from
+        (
+        select r.room_building_id bid,crid.* from
+        (
+        select  mrc.room_id rid,c.id from (
+        select * from mos_company where id in
+        <foreach collection="s.avaComIdSet" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        )c LEFT JOIN mos_room_com mrc on c.id=mrc.com_id
+        )crid LEFT JOIN mos_room r on r.id= crid.rid
+        )cr LEFT JOIN mos_building b on b.id=cr.bid
+        )cb LEFT JOIN mos_park p on p.id = cb.pid
+        )cp LEFT JOIN mos_manager m on m.man_com_id=cp.id
+        )cpm LEFT JOIN mos_area a on a.areaID= cpm.park_areaID
+        )cam LEFT JOIN mos_city city on city.cityID=cam.ciid
+        ORDER BY id )comall
+        <where>
+
+            <if test="s.avaManIdSet!=null">
+
+                AND mid in         <foreach collection="s.avaManIdSet" item="item" index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+
+            </if>
+
+        </where>
+
+    </select>
+    <select id="companyFilter" resultType="String">
+        SELECT  DISTINCT id FROM
+        (
+        select city.father prid,cam.* FROM
+        (
+        select a.father ciid,cpm.* from
+        (
+        select m.id mid ,cp.* FROM
+        (
+        SELECT cb.*,p.park_areaID from
+        (
+        select b.building_park_id pid,cr.* from
+        (
+        select r.room_building_id bid,crid.* from
+        (
+        select  mrc.room_id rid,c.id from (
+        select * from mos_company where id in
+        <foreach collection="s.avaComIdSet" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        )c LEFT JOIN mos_room_com mrc on c.id=mrc.com_id
+        )crid LEFT JOIN mos_room r on r.id= crid.rid
+        )cr LEFT JOIN mos_building b on b.id=cr.bid
+        )cb LEFT JOIN mos_park p on p.id = cb.pid
+        )cp LEFT JOIN mos_manager m on m.man_com_id=cp.id
+        )cpm LEFT JOIN mos_area a on a.areaID= cpm.park_areaID
+        )cam LEFT JOIN mos_city city on city.cityID=cam.ciid
+        ORDER BY id )comall
+        <where>
+
+            <if test="s.avaManIdSet!=null">
+
+                AND mid in         <foreach collection="s.avaManIdSet" item="item" index="index" open="(" close=")" separator=",">
+                                    #{item}
+                                   </foreach>
+
+            </if>
+
+        </where>
+        limit #{s.startPos},#{s.pageSize}
+    </select>
+    <select id="getComAllBySet" resultMap="CompanyBaseMap">
+      select city.father prid,cam.* FROM
+      (
+      select a.father ciid,cpm.* from
+      (
+      select m.man_name,m.id mid ,cp.* FROM
+      (
+      SELECT cb.*,p.park_name,p.park_areaID from
+      (
+      select b.building_park_id pid,cr.* from
+      (
+      select r.room_building_id bid,crid.* from
+      (
+      select  mrc.room_id rid,c.* from (
+      select * from mos_company  where id in
+        <foreach collection="s" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+      )c LEFT JOIN mos_room_com mrc on c.id=mrc.com_id
+      )crid LEFT JOIN mos_room r on r.id= crid.rid
+      )cr LEFT JOIN mos_building b on b.id=cr.bid
+      )cb LEFT JOIN mos_park p on p.id = cb.pid
+      )cp LEFT JOIN mos_manager m on m.man_com_id=cp.id
+      )cpm LEFT JOIN mos_area a on a.areaID= cpm.park_areaID
+      )cam LEFT JOIN mos_city city on city.cityID=cam.ciid
+    </select>
 </mapper>

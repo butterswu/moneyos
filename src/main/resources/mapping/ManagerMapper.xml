@@ -10,58 +10,82 @@
         <result column="man_tel" property="manTel" jdbcType="VARCHAR"/>
         <result column="man_email" property="manEmail" jdbcType="VARCHAR"/>
         <result column="com_name" property="manComName" jdbcType="VARCHAR"/>
-
     </resultMap>
-
-
-
-
     <!-- 分页SQL语句 -->
+
     <sql id="selectManagerIntention" >
-        (SELECT m.*,c.com_name FROM mos_manager m LEFT JOIN mos_company c ON m.man_com_id =c.id <where>
-        <if test="i0!=0">
+        (SELECT m.*,c.com_name FROM
+        (SELECT * from
+        mos_manager WHERE id IN
+        <foreach collection="s.avaManIdSet" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        )
+        m
+        LEFT JOIN mos_company c ON m.man_com_id =c.id <where>
+        <if test="s.i0!=0">
             OR man_intention=0
         </if>
-        <if test="i1!=0">
+        <if test="s.i1!=0">
             OR man_intention=1
         </if>
-        <if test="i2!=0">
+        <if test="s.i2!=0">
             OR man_intention=2
         </if>
-        <if test="i3!=0">
+        <if test="s.i3!=0">
             OR man_intention=3
         </if>
-        <if test="i4!=0">
+        <if test="s.i4!=0">
             OR man_intention=4
         </if>
+
     </where>) a
+
     </sql>
+
     <select id="selectManagerByPage" resultMap="ManagerBaseMap" parameterType="ssm.model.SelectInf">
- 
-    select * from <include refid="selectManagerIntention"/>
-    <where>
-        <if test="managername!=null">
-            AND man_name LIKE '%${managername}%'
-        </if>
-        <if test="companyName!=null">
-            AND com_name LIKE '%${companyName}%'
-        </if>
-    </where>
-    limit ${startPos},${pageSize}
 
 
-  </select>
-    <select id="getManagerCount" resultType="long" parameterType="ssm.model.SelectInf">
-    SELECT COUNT(*) from <include refid="selectManagerIntention"/>
+
+        select * from <include refid="selectManagerIntention"/>
+
         <where>
-            <if test="managername!=null">
-                AND man_name LIKE '%${managername}%'
-            </if>
-            <if test="companyName!=null">
-                AND com_name LIKE '%${companyName}%'
-            </if>
-        </where>
 
+            <if test="s.managername!=null">
+
+                AND man_name LIKE '%${s.managername}%'
+
+            </if>
+
+            <if test="s.companyName!=null">
+
+                AND com_name LIKE '%${s.companyName}%'
+
+            </if>
+
+        </where>
+        limit #{s.startPos},#{s.pageSize}
+    </select>
+
+    <select id="getManagerCount" resultType="long" parameterType="ssm.model.SelectInf">
+
+        SELECT COUNT(*) from <include refid="selectManagerIntention"/>
+
+        <where>
+
+            <if test="s.managername!=null">
+
+                AND man_name LIKE '%${s.managername}%'
+
+            </if>
+
+            <if test="s.companyName!=null">
+
+                AND com_name LIKE '%${s.companyName}%'
+
+            </if>
+
+        </where>
     </select>
     <select id="getManagerById" resultMap="ManagerBaseMap">
         SELECT * FROM mos_manager where id =#{id}
@@ -77,5 +101,17 @@
     </insert>
     <select id="getManagerListByComId" resultMap="ManagerBaseMap">
         SELECT * FROM mos_manager WHERE man_com_id =#{id}
+    </select>
+    <select id="getManIdSetByComIdSet" resultType="String">
+        select m.id FROM
+        (
+        SELECT id from mos_company where id in
+        <foreach collection="set" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        )c LEFT JOIN mos_manager m ON c.id=m.man_com_id
+    </select>
+    <select id="getManagerIdSetByLikeName" resultType="String">
+        SELECT id FROM mos_manager WHERE man_name LIKE '%${manName}%'
     </select>
 </mapper>

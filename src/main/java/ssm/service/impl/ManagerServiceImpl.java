@@ -8,12 +8,14 @@ import ssm.dao.ManagerDao;
 import ssm.dao.RecordDao;
 import ssm.model.*;
 import ssm.service.ManagerService;
+import ssm.service.UtilService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -24,6 +26,8 @@ public class ManagerServiceImpl implements ManagerService{
     private RecordDao recordDao;
     @Resource
     private CompanyDao companyDao;
+    @Resource
+    private UtilService utilService;
 
 
     public void showManagerByPage(HttpServletRequest request, Model model) {
@@ -95,8 +99,12 @@ public class ManagerServiceImpl implements ManagerService{
         this.managerDao.newManager(manager);
     }
     public Page ajaxgetManagerByPage(HttpServletRequest request ,Model model){
+        Set<String> avaParkIdSet=this.utilService.getAvaParkIdSet();
+        Set<String> avaComIdSet=this.companyDao.getCompanyIdSetByParkIdSet(avaParkIdSet);
+        Set<String> avaManIdSet=this.managerDao.getManIdSetByComIdSet(avaComIdSet);
         String pageNow =request.getParameter("pageNow");
         SelectInf selectInf =new SelectInf();
+        selectInf.setAvaManIdSet(avaManIdSet);
         if (request.getParameter("manager")!=""){
             selectInf.setManagername(request.getParameter("manager"));
         }
