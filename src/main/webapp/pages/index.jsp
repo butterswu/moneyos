@@ -18,7 +18,6 @@
 <head>
     <title>MoneyOS</title>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no" />
     <link rel="stylesheet" href="pages/css/bootstrap.min.css" />
     <link rel="stylesheet" href="pages/css/bootstrap-responsive.min.css" />
     <link rel="stylesheet" href="pages/css/fullcalendar.css" />
@@ -45,25 +44,11 @@
                 <li class="sub_menu"><a href="#">人员管理</a></li>
                 <li class="sub_menu"><a href="<%=basePath%>business/parkAllocation">园区分配</a></li>
             </ul>
-        <li class="main_menu icon_c"><a>测试测试1</a></li>
-            <ul class="sub_menu_box">
-                <li class="sub_menu"><a href="#">人员管理</a></li>
-                <li class="sub_menu"><a href="<%=basePath%>business/parkAllocation">园区分配</a></li>
-            </ul>
-        <li class="main_menu icon_c"><a>测试测试2</a></li>
-            <ul class="sub_menu_box">
-                <li class="sub_menu"><a href="#">1</a></li>
-                <li class="sub_menu"><a href="#">2</a></li>
-                <li class="sub_menu"><a href="#">3</a></li>
-                <li class="sub_menu"><a href="#">4</a></li>
-                <li class="sub_menu"><a href="#">5</a></li>
-                <li class="sub_menu"><a href="#">6</a></li>
-            </ul>
     </ul>
 </div>
 <!--主体显示-->
 <div class="contentbox">
-    <div id="maincontent" class="maincontent">
+    <div class="control_content">
         <!--breadcrumbs-->
         <div id="content-header">
             <div id="breadcrumb"> <a href="pages/index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> 总览</a></div>

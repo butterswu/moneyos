@@ -3,11 +3,12 @@ a{ text-decoration:none; cursor:pointer;}
 h1{ margin:0;}
 ul{ list-style:none; margin:0;}
 html,body{ height:100%; background-color:#fff; box-sizing:border-box;}
+input,button{ margin: 0; padding: 0; border: none; outline: none; -webkit-appearance: none; appearance:none; display: block; box-sizing: border-box;}
 /*头部导航*/
-.header{ position:fixed; top:0; left:0; width:100%; height:50px; background-color:#2A303C; z-index:777;}
+.header{ position:fixed; top:0; left:0; width:100%; height:50px; background:linear-gradient(to bottom,#f81616,#B60909); z-index:777;}
 .header_logo{ display:block; width:160px; height:40px; background: url(/pages/img/header_logo.png) no-repeat center; transform: translateY(5px) translateX(40px);}
 /*侧导航*/
-.sidemenu{ position:fixed; top:50px; left:0; width:170px; height:100%; z-index: 777; background-color:#373D47!important;}
+.sidemenu{ position:fixed; top:50px; left:0; width:170px; height:100%; z-index: 777; background-color:#242424;}
 .control_sidemenu{ margin-top:35px;}
     /*主菜单*/
 .main_menu{ background-repeat:no-repeat; background-position:17px center;}
@@ -16,11 +17,10 @@ html,body{ height:100%; background-color:#fff; box-sizing:border-box;}
 .active_main_menu{ background-color:#f81616;}
     /*子菜单*/
 .sub_menu_box{ display:none;}
-.sub_menu_box_s{ display:block!important;}
-.sub_menu{ background-repeat:no-repeat; background-position:17px center; background-color:#414853;}
+.sub_menu{ background-repeat:no-repeat; background-position:17px center; background-color:#373737;}
 .sub_menu:hover{ background-color:#fff;}
-.sub_menu a:hover{ background-color:#fff; color:#000;}
 .sub_menu a{ display:block; color:#fff; font-size:12px; line-height:40px; letter-spacing:1px; padding-left:57px;}
+.sub_menu a:hover{ background-color:#fff; color:#000;}
 .active_sub_menu{ background-color:#fff;}
 .active_sub_menu a{ color:#000;}
     /*图标*/
@@ -28,5 +28,10 @@ html,body{ height:100%; background-color:#fff; box-sizing:border-box;}
 .icon_b,.icon_c{ background-image:url(/pages/img/icon/icon_b.png);}
 .icon_c_s{ background-image:url(/pages/img/icon/icon_b_s.png);}
 /*主体显示*/
-.contentbox{ position:absolute; top:50px; left:170px; right:0; bottom:0; background-color:#fff;}
-.maincontent{ position:absolute; top:0; left:0; right:0; bottom:0; width:auto; overflow:hidden; overflow-y:scroll;}
+    /*框架*/
+.contentbox{ position:absolute; top:50px; left:170px; right:0; bottom:0; background-color:#f7f7f7;}
+.control_content{ position:absolute; top:0; left:0; right:0; bottom:0; width:auto; overflow:hidden; overflow-y:scroll;}
+    /*眉头介绍*/
+.content_introduce{ border-left:4px solid #f81616; padding-left:7px; margin:20px 0 0 20px;}
+.content_introduce h1{ font-size:17px; color:#333333; line-height:17px;}
+.content_main{ margin:18px 10px 0 10px;}
