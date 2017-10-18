@@ -252,7 +252,7 @@
 </div>
 <!--主体显示-->
 <div class="contentbox">
-    <div id="content-s" class="maincontent">
+    <div class="control_content">
         <div id="content-header">
             <div id="breadcrumb"> <a href="pages/index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>总览</a> <a href="<%=basePath%>park/parklist" class="icon-home">楼盘管理</a> </div>
             <shiro:hasRole name="salesman:single_sign">aaa</shiro:hasRole><h1>园区管理</h1>

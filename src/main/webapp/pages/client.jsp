@@ -18,13 +18,6 @@
 <head>
     <title>MoneyOS</title>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="pages/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="pages/css/bootstrap-responsive.min.css" />
-    <link rel="stylesheet" href="pages/css/uniform.css" />
-    <link rel="stylesheet" href="pages/css/select2.css" />
-    <link rel="stylesheet" href="pages/css/matrix-style.css" />
-    <link rel="stylesheet" href="pages/css/matrix-media.css" />
-    <link href="pages/font-awesome/css/font-awesome.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="pages/css/common.css" />
     <link rel="stylesheet" href="pages/css/client.css" />
@@ -223,129 +216,150 @@
 </div>
 <!--主体显示-->
 <div class="contentbox">
-    <div id="maincontent" class="maincontent">
-        <div id="content-header-s" class="content_introduce">
+    <div class="keep"></div>
+    <div class="control_content">
+        <!--头部介绍-->
+        <div class="content_introduce">
             <h1>客户管理</h1>
         </div>
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="span12">
-                    <div class="widget-box">
+        <!--功能区域-->
+        <div class="content_main">
+            <!--检索区域-->
+            <div class="search_box">
+                <div class="search_first">
+                    <div class="search_first_a">
+                        <span>按联系人检索</span><form action="<%=basePath%>client/companyList"><button type="submit" class="" >按公司检索</button></form>
+                    </div>
+                    <div class="search_first_b">
+                        <label class="search_first_b_a">
+                            <input type="checkbox" id="i0" class="i s_middle"><span class="s_middle">已签约</span>
+                        </label>
+                        <label class="search_first_b_b">
+                            <input type="checkbox" id="i4" class="i s_middle"><span class="s_middle">试用中</span>
+                        </label>
+                    </div>
+                </div>
 
+                <div class="search_second">
+                    <div class="search_second_a">按意向</div>
+                    <div class="search_second_b">
+                        <label class="bt_search_second_b_a">
+                            <input type="checkbox" id="i1" class="i s_middle"><span class="s_middle">A</span>
+                        </label>
+                        <label class="bt_search_second_b_b">
+                            <input type="checkbox" id="i2" class="i s_middle"><span class="s_middle">B</span>
+                        </label>
+                        <label class="bt_search_second_b_c">
+                            <input type="checkbox" id="i3" class="i s_middle"><span class="s_middle">C</span>
+                        </label>
+                    </div>
+                </div>
 
-                        <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-                            <h5>按联系人检索</h5><form action="<%=basePath%>client/companyList"> <button type="submit" class="btn btn-primary" >切换为按公司检索</button></form>
-                        </div>
-
-                        <div  data-toggle="buttons">
-                            <span>按意向</span>
-                            <label class="btn btn-default " >
-                                <input type="checkbox" id="i0" class="i">已签约
-                            </label>
-                            <label class="btn btn-default">
-                                <input type="checkbox" id="i4" class="i"> 试用中
-                            </label>
-                            <label class="btn btn-default">
-                                <input type="checkbox" id="i1" class="i"> A
-                            </label>
-                            <label class="btn btn-default">
-                                <input type="checkbox" id="i2" class="i"> B
-                            </label>
-                            <label class="btn btn-default">
-                                <input type="checkbox" id="i3" class="i"> C
-                            </label>
-                        </div>
-                        <span>按联系人</span><input type="text" id="selectByManager"><br>
+                <div class="search_third">
+                    <div class="search_third_a">
+                        <span>按联系人</span><input type="text" id="selectByManager">
+                    </div>
+                    <div class="search_third_b">
                         <span>按公司名</span><input type="text" id="selectByCompany">
-
-
-                        <div class="widget-content nopadding">
-                            <table class="table table-bordered ">
-                                <thead>
-                                <tr>
-                                    <th>姓名</th>
-                                    <th>公司</th>
-                                    <th>意向</th>
-                                    <th>电话</th>
-                                    <th>联系人详细</th>
-                                    <th>公司详细</th>
-                                </tr>
-                                </thead>
-                                <tbody id="mananagertable">
-                                </tbody>
-                            </table>
-                        </div>
-                        <div align="center" id="choosepage" >
-                            <p>原本</p>
-                        </div>
-                        <button type="button" class="btn btn-primary" id="createbt">
-                            添加联系人
-                        </button>
-                        <div id="myModal" >
-                            <div class=" clearfix visible-md-block visible-lg-block" hidden id="create">
-                                <div class="widget-content nopadding">
-                                    <h4 id="newmanagersuccess" align="center" hidden >添加成功</h4>
-                                    <form id="newmanager">
-
-                                        <div class="control-group">
-                                            <label class="control-label">姓名 :</label>
-                                            <div class="controls">
-                                                <input type="text" class="span11" placeholder="姓名" name="manName"/>
-                                            </div>
-                                        </div>
-                                        <div class="control-group" id="company">
-                                            <label class="control-label">公司 :</label>
-                                            <div class="controls">
-                                                <input type="text" class="span11" placeholder="公司"  id="companyname"/>
-                                                <input type="hidden" name="manComId" value="" id="companyid">
-                                            </div>
-                                            <div id="checkresult" hidden></div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label">邮箱 :</label>
-                                            <div class="controls">
-                                                <input type="text"  class="span11" placeholder="邮箱" name="manEmail" />
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label">电话 :</label>
-                                            <div class="controls">
-                                                <input type="text" class="span11" placeholder="电话" name="manTel"/>
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label">意向:</label>
-                                        </div>
-                                            <input type="hidden" class="span11"  name="manIntention"/>
-                                            <div class="btn-group" id="manIntent" data-toggle="buttons" >
-                                                <label class="btn btn-default">
-                                                    <input type="radio" class="toggle" value="0"> 签约
-                                                </label>
-                                                <label class="btn btn-default">
-                                                    <input type="radio" class="toggle" value="4"> 试用中
-                                                </label>
-                                                <label class="btn btn-default">
-                                                    <input type="radio" class="toggle" value="1"> A
-                                                </label>
-                                                <label class="btn btn-default">
-                                                    <input type="radio" class="toggle" value="2"> B
-                                                </label>
-                                                <label class="btn btn-default">
-                                                    <input type="radio" class="toggle" value="3"> C
-                                                </label>
-                                            </div>
-                                        <div class="form-actions">
-                                            <button type="button" class="btn btn-success" id="b1" aria-checked="">保存</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <!--添加用户-->
+            <button type="button" class="add_bt" id="createbt">添加联系人</button>
+
+            <!--数据显示区域-->
+            <div class="data_content">
+                <!--显示部分-->
+                <div class="main_data_content">
+                    <table class="table table-bordered ">
+                        <thead>
+                            <tr>
+                                <th>姓名</th>
+                                <th>公司</th>
+                                <th>意向</th>
+                                <th>电话</th>
+                                <th>联系人详细</th>
+                                <th>公司详细</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mananagertable"></tbody>
+                    </table>
+                </div>
+                <!--翻页-->
+                <div align="center" id="choosepage" ></div>
+            </div>
         </div>
     </div>
+
+    <!--增添数据框-->
+    <div class="add_data_box">
+        <div class="head_add_data">
+            <h1>添加联系人</h1>
+            <span class="close_add_data"></span>
+        </div>
+
+        <form class="main_add_data" id="newmanager">
+            <div class="control_data">
+                <label class="title_data">姓名 :</label>
+                <div class="write_data">
+                    <input type="text" class="span11 write_data_box" name="manName"/>
+                </div>
+            </div>
+
+            <div class="control_data" id="company">
+                <label class="title_data">公司 :</label>
+                <div class="write_data">
+                    <input type="text" class="span11 write_data_box" id="companyname"/>
+                </div>
+                    <!--<input type="hidden" name="manComId" value="" id="companyid">-->
+            </div>
+            <!--公司选择-->
+            <div class="choice_company" id="checkresult" hidden></div>
+
+            <div class="control_data">
+                <label class="title_data">邮箱 :</label>
+                <div class="write_data">
+                    <input type="text"  class="span11 write_data_box" name="manEmail" />
+                </div>
+            </div>
+
+            <div class="control_data">
+                <label class="title_data">电话 :</label>
+                <div class="write_data">
+                    <input type="text" class="span11 write_data_box" name="manTel"/>
+                </div>
+            </div>
+
+            <div class="control_data">
+                <label class="title_data">意向 :</label>
+                <div class="write_data" id="manIntent">
+                    <div class="order_state">
+                        <label for="order_state_a" class="order_state_a">签约</label>
+                        <input type="radio" id="order_state_a" value="0" name="state">
+                        <label for="order_state_b" class="order_state_b">试用</label>
+                        <input type="radio" id="order_state_b" value="4" name="state">
+                    </div>
+
+                    <div class="order_level">
+                        <label class="order_level_a">
+                            <input type="radio" value="1" name="level"><span>A</span>
+                        </label>
+                        <label class="order_level_b">
+                            <input type="radio" value="2" name="level"><span>B</span>
+                        </label>
+                        <label class="order_level_c">
+                            <input type="radio" value="3" name="level"><span>C</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!--<input type="hidden" class="span11"  name="manIntention"/>-->
+
+            <button type="button" class="save_data" id="b1" aria-checked="">保存</button>
+        </form>
+    </div>
+
 </div>
 
 <script src="pages/js/common.js"></script>

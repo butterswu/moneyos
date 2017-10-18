@@ -29,22 +29,18 @@
 <div id="loginbox" class="loginbox">
     <form  class="form-vertical formbox" action="<%=basePath%>user/shiro-login" method="post">
         <h1 class="login_intrduce">登录MoneyOS系统</h1>
-        <div class="control-group btn_margin">
-            <div class="controls">
-                <div class="main_input_box">
-                    <input class="btn_username" type="text" placeholder="用户名" name="userName" />
-                </div>
+        <div class="btn_margin">
+            <div class="main_input_box">
+                <input class="btn_username" type="text" placeholder="用户名" name="userName" />
             </div>
         </div>
-        <div class="control-group btn_margin">
-            <div class="controls">
-                <div class="main_input_box">
-                    <input class="btn_password" type="password" placeholder="密码" name="userPwd"/>
-                </div>
+        <div class="btn_margin">
+            <div class="main_input_box">
+                <input class="btn_password" type="password" placeholder="密码" name="userPwd"/>
             </div>
         </div>
-        <div class="form-actions btn_margin">
-            <input class="btn btn-success btn_login" type="submit" value="登 录"/>
+        <div class="btn_margin">
+            <input class="btn_login" type="submit" value="登 录"/>
         </div>
     </form>
 </div>
