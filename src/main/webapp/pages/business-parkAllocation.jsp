@@ -38,8 +38,7 @@
     <script src="pages/js/matrix.tables.js"></script>
     <script type="text/javascript">
         $(function (){
-
-
+            var a =1
             var getAllSub=function (userList,prename) {
                 $.each(userList,function (index,user) {
                     var name=prename+user.userCname;
