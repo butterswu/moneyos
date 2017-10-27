@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="pages/css/select2.css" />
     <link rel="stylesheet" href="pages/css/matrix-style.css" />
     <link rel="stylesheet" href="pages/css/matrix-media.css" />
+    <link rel="stylesheet" href="pages/tree/lay/css/layui.css" />
     <link href="pages/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <script src="pages/js/jquery.min.js"></script>
     <script src="pages/js/jquery.ui.custom.js"></script>
@@ -32,6 +33,7 @@
     <script src="pages/js/jquery.uniform.js"></script>
     <script src="pages/js/select2.min.js"></script>
     <script src="pages/js/jquery.dataTables.min.js"></script>
+    <script src="pages/tree/layui.js" charset="utf-8"></script>
 <%--    <script src="pages/js/matrix.js"></script>
     <script src="pages/js/matrix.tables.js"></script>--%>
     <script type="text/javascript">
@@ -40,7 +42,7 @@
             var manager=""
             $(document).ready(function(){
                 getcompanybypage()
-                getselpark()
+                getLoc()
             });
             var getcompanybypage = function (pagenow) {
 
@@ -145,94 +147,111 @@
                     }
                 })
             })
-            var getselpark=function () {
+            var getLoc=function () {
                 $.ajax({
                     type:"post",
                     url:"<%=basePath%>park/getAllNameId",
+                    async: false,
                     success: function (result) {
-                        var str=""
+                        var nodes=[]
                         var park=$.parseJSON(result)
                         park=$.parseJSON(park)
                         $.each(park ,function (i,item) {
-                            str+="<tr pid='"+item.id+"'><td>"+item.parkName+"</td><td><input type='checkbox' class='allPark' value='1'></td></tr>"
+                            var row={}
+                            row.name=item.parkName
+                            row.data={
+                                'nodeName':item.parkName,
+                                'parkid':item.id
+                            }
+                            row.children=[]
+                            $.ajax({
+                                type:"post",
+                                url:'<%=basePath%>park/ajaxGetBuildingListByParkId',
+                                data:{'parkid':item.id},
+                                async: false,
+                                success:function (result2) {
+                                    var buildingList=$.parseJSON(result2)
+                                    buildingList=$.parseJSON(buildingList)
+                                $.each(buildingList,function (i2,item2) {
+                                    var row2={}
+                                    row2.name=item2.buildingName
+                                    row2.checkboxValue=item2.id
+                                    /*row2.data={
+                                        'nodeName':item2.buildingName,
+                                        'buildingId':item2.id,
+                                        'buildingParkId':item2.buildingParkId
+                                    }*/
+                                    row2.children=[]
+                                    $.ajax({
+                                        type:"post",
+                                        url:'<%=basePath%>park/ajaxGetRoomListByBuildingId',
+                                        data:{'id':item2.id},
+                                        async: false,
+                                        success:function (result3) {
+                                           var room=$.parseJSON(result3)
+                                            room=$.parseJSON(room)
+                                            $.each(room,function (i3,item3) {
+                                                var row3={}
+                                                row3.name=item3.roomName
+                                                row3.checkboxValue=item3.id
+                                                row3.data={//为元素添加额外数据，即在元素上添加data-xxx="yyy"，可选
+                                                    kind: "room",
 
+                                                }
+                                                row2.children.push(row3)
+
+                                            })
+                                        }
+                                    })
+                                    row.children.push(row2)
+                                })
+                                }
+                            })
+                            nodes.push(row)
                         })
-                        $("#selPark").html(str)
-
+                        /*console.log(nodes)*/
+                        buildTree(nodes)
                     }
                 })
             }
-            var choosePark=function (parkId) {
-                $.ajax({
-                    type:"post",
-                    url:"<%=basePath%>park/ajaxGetBuildingListByParkId",
-                    data:{"parkid":parkId},
 
-                    success:function (result) {
-                        /*$("#selRoom").html("")*/
-                        var str=""
-                        var buildinglist=$.parseJSON(result)
-                        buildinglist=$.parseJSON(buildinglist)
-                        $.each(buildinglist,function (i,item) {
-                            str+="<tr bid='"+item.id+"'><td class='parkTd'>"+item.buildingName+"</td><td><input type='checkbox' class='allBuilding'></td></tr>"
+            var buildTree=function (nodes) {
 
-                        })
-                        $("#selBuilding").html(str)
-                    }
-                })
 
+                layui.use('tree', function () {
+                    var tree = layui.tree({
+                        elem: '#demo', //指定元素，生成的树放到哪个元素上
+                        check: 'checkbox', //勾选风格
+                        skin: 'as', //设定皮肤
+                        drag: true,//点击每一项时是否生成提示信息
+                        checkboxName: 'aa[]',//复选框的name属性值
+                        checkboxStyle: "",//设置复选框的样式，必须为字符串，css样式怎么写就怎么写
+                        click: function (item) {
+
+                            //点击节点回调
+                          /*  console.log("item")*/
+                        },
+                        onchange: function () {//当当前input发生变化后所执行的回调
+
+
+                            $("input:checkbox[data-kind='room']:checked").each(function (i,item) {
+
+                                console.log(item.value)
+                            })
+                            /*console.log(this);*/
+
+                        },
+
+                        nodes:nodes
+                    });
+                });
             }
 
-            $("#selPark tr").live('click',function () {
-
-                    choosePark($(this).attr("pid"))
-            })
-            var chooseBuilding=function (buildingId) {
-                $.ajax({
-                    type:"post",
-                    url:"<%=basePath%>park/ajaxGetRoomListByBuildingId",
-                    data:{"id":buildingId},
-                    success:function (result) {
-                        var roomList=$.parseJSON(result)
-                        roomList=$.parseJSON(roomList)
-                        var str=""
-                        $.each(roomList,function (i,item) {
-                            str+="<tr rid='"+item.id+"'><td>"+item.roomName+"</td><td><input type='checkbox' class='allRoom'></td></tr>"
-                        })
-                        $("#selRoom").html(str)
-                    }
-
-                })
-            }
-            $("#selBuilding tr").live('click',function () {
-
-                chooseBuilding($(this).attr("bid"))
-            })
-            $(".allBuilding").live('click',function () {
 
 
-            })
-            var checkAll=function () {
-                $(".allBuilding").attr("checked",true)
-                $(".allRoom").attr("checked",true)
-                e.stopPropagation();
-            }
-            $(".allPark").live('click',function (e) {
-                var pid=$(this).parent().parent().attr("pid")
-                if ($(this).is(':checked')){
-                    /*choosePark(pid)*/
-                    checkAll()
-                }
-                e.stopPropagation();
 
-            })
-            $("#aa").click(function () {
-                $.each($(".ss"),function (i,item) {
-                    $(item).attr("checked","checked")
-                })
-                /*$(".ss").attr("checked",true)*/
 
-            })
+
 
 
 
@@ -290,8 +309,11 @@
                     <span>检索条件</span><br>
                     <span>联系人</span><input type="text" id="selectByManager"><br>
                     <span>单位名</span><input type="text" id="selectByCompany"><br>
-                    <span>区位条件</span><button id="aa">sss</button><input type="checkbox" class="ss" id="ssa" value="22" checked=""><input type="checkbox" class="ss" value="11"><input type="checkbox" class="ss" value="33">
-                    <table class="table table-bordered ">
+                    <span>区位条件</span>
+                    <ul id="demo"></ul>
+
+
+                   <%-- <table class="table table-bordered ">
 
                         <tr>
 
@@ -300,7 +322,6 @@
                                 <tr>
                                     <th>园区名称 </th>
                                     <th>全选园区</th>
-
                                 </tr>
                                 </thead>
                                 <tbody id="selPark">
@@ -333,7 +354,7 @@
                             </table></td>
                         </tr>
 
-                    </table>
+                    </table>--%>
 
 
 
@@ -360,6 +381,7 @@
                     <button type="button" class="btn btn-primary" id="createbt">
                         添加单位
                     </button>
+                    <ul id="demo"></ul>
                     <div id="myModal" >
                         <div class=" clearfix visible-md-block visible-lg-block" hidden id="create">
                             <div class="widget-content nopadding">

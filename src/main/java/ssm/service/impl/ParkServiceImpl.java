@@ -69,6 +69,7 @@ public class ParkServiceImpl implements ParkService{
 
     }
     public List<Building> getBuildingListByParkId(HttpServletRequest request,Model model){
+
         List<Building> buildingList =this.buildingDao.getBuildingListByParkId(Integer.parseInt(request.getParameter("parkid")));
         return buildingList;
     }

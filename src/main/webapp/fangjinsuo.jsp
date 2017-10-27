@@ -37,7 +37,7 @@
     <script type="text/javascript">
         $(function(){
             $("#b1").click(function(){
-                  var url1="http://120.26.74.199:8080/ucrm/api/exportCallDetails?startTime=2017-10-15%2000:01&endTime=2017-10-16%2000:00&minContactTime=0&apiKey=XIOxUFOeE5BPWZhbmdqaW5zdW89TllZeE49PFQfUCI"
+                  var url1="http://120.26.74.199:8080/ucrm/api/exportCallDetails?startTime=2017-10-26%2016:01&endTime=2017-10-27%2000:00&minContactTime=0&apiKey=XIOxUFOeE5BPWZhbmdqaW5zdW89TllZeE49PFQfUCI"
                 $.ajax({
                     url: "<%=basePath%>business/get",
                     type: "POST",

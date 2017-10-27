@@ -19,6 +19,31 @@
     <!-- 自动扫描  @Controller-->
     <context:component-scan base-package="ssm.controller"/>
 
+    <!--工作的bean-->
+<!--    <bean id="myJob" class="ssm.utils.Quartz"/>
+    &lt;!&ndash;job配置的开始&ndash;&gt;
+    <bean id="myJobDetail"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <ref bean="myJob"/>
+        </property>
+        &lt;!&ndash;<property name="targetMethod" value="work">
+
+        </property>&ndash;&gt;
+    </bean>
+    &lt;!&ndash;job的配置结束&ndash;&gt;
+
+    &lt;!&ndash;调度的配置开始&ndash;&gt;
+    <bean id="crontestJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail">
+            <ref bean="myJobDetail"/>
+        </property>
+        <property name="cronExpression">
+            <value>10 */1 * * * ?</value>
+        </property>
+    </bean>-->
+    <!--调度的配置结束-->
+
     <!-- 包含shiro的配置文件 -->
     <import resource="classpath:applicationContext-shiro.xml"/>
     <!-- 添加shiro-->
